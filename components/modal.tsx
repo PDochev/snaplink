@@ -1,12 +1,25 @@
 "use client";
 
-import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
+import {
+  type ElementRef,
+  useEffect,
+  useRef,
+  useCallback,
+  MouseEventHandler,
+} from "react";
 import { useRouter } from "next/navigation";
+import { createPortal } from "react-dom";
 
 export default function Modal({ children }: { children: React.ReactNode }) {
-  const overlay = useRef(null);
-  const wrapper = useRef(null);
   const router = useRouter();
+  const dialogRef = useRef<ElementRef<"dialog">>(null);
+  const overlay = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!dialogRef.current?.open) {
+      dialogRef.current?.showModal();
+    }
+  }, []);
 
   const onDismiss = useCallback(() => {
     router.back();
@@ -14,37 +27,28 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 
   const onClick: MouseEventHandler = useCallback(
     (e) => {
-      if (e.target === overlay.current || e.target === wrapper.current) {
+      if (e.target === overlay.current || e.target === dialogRef.current) {
         if (onDismiss) onDismiss();
       }
-    },
-    [onDismiss, overlay, wrapper]
-  );
-
-  const onKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") onDismiss();
     },
     [onDismiss]
   );
 
-  useEffect(() => {
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [onKeyDown]);
-
-  return (
+  return createPortal(
     <div
       ref={overlay}
-      className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/60 p-10"
       onClick={onClick}
+      className="absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center z-[1000] bg-black/75"
     >
-      <div
-        ref={wrapper}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 sm:w-10/12 md:w-8/12 lg:w-2/5 p-6"
+      <dialog
+        ref={dialogRef}
+        className="w-1/2 border-none rounded-md bg-white relative flex items-center justify-center"
+        onClose={onDismiss}
       >
         {children}
-      </div>
-    </div>
+        <button onClick={onDismiss} className="close-button" />
+      </dialog>
+    </div>,
+    document.getElementById("modal-root")!
   );
 }
