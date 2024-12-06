@@ -61,15 +61,15 @@ body {
   color: black;
 }
 
-.cards-container {
+/* .cards-container {
   display: grid;
   grid-template-columns: repeat(3, 200px);
   gap: 16px;
   justify-content: center;
   align-items: center;
   padding: 16px;
-}
-
+} */
+/* 
 .card {
   display: flex;
   justify-content: center;
@@ -82,4 +82,4 @@ body {
   font-size: 24px;
   font-weight: 500;
   max-width: 200px;
-}
+} */

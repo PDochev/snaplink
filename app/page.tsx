@@ -1,24 +1,41 @@
 import Link from "next/link";
 import wonders from "./wonders";
 import Image from "next/image";
+import NavBar from "@/components/NavBar";
 
 export default function Home() {
   return (
-    <main className="container mx-auto">
-      <h1 className="text-center text-3xl font-bold my-4">
-        New Wonders of the World
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 ">
-        {wonders.map(({ id, src, name }) => (
-          <Link key={id} href={`/photo/${id}`}>
-            <Image
-              alt={name}
-              src={src}
-              className=" object-cover aspect-square"
-            />
-          </Link>
-        ))}
-      </div>
-    </main>
+    <>
+      <NavBar />
+      <main className="mx-auto max-w-[1960px] p-4">
+        <div>
+          <h1 className="text-center text-3xl font-bold my-4">
+            Welcome to SnapLink
+          </h1>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
+          {wonders.map(({ id, src, name }) => (
+            <Link
+              className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
+              key={id}
+              href={`/photo/${id}`}
+            >
+              <Image
+                width={720}
+                height={480}
+                sizes="(max-width: 640px) 100vw,
+                 (max-width: 1280px) 50vw,
+                 (max-width: 1536px) 33vw,
+                 25vw"
+                alt={name}
+                src={src}
+                className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-square"
+                // style={{ transform: "translate3d(0, 0, 0)" }}
+              />
+            </Link>
+          ))}
+        </div>
+      </main>
+    </>
   );
 }

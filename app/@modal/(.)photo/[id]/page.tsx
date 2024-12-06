@@ -15,7 +15,7 @@ export default async function PhotoModal({
       <Image
         alt={photo.name}
         src={photo.src}
-        className="object-cover aspect-square"
+        className="transform brightness-110 transition will-change-auto  object-cover aspect-square"
       />
     </Modal>
   );
