@@ -30,6 +30,10 @@ export default function FileUpload() {
             method: "PUT",
           });
 
+          if (!uploadResponse.ok) {
+            throw new Error("Upload failed");
+          }
+
           // Call server action to save image
           await uploadImage(signedUrl.split("?")[0]);
         } catch (error) {

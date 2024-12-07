@@ -1,12 +1,31 @@
 import Image from "next/image";
 import { getImages } from "@/app/lib/data";
+import { ImageS3 } from "@/app/lib/definitions";
+import { Metadata } from "next";
+
+type Props = {
+  params: { id: string };
+};
+
+export const generateMetadata = async ({
+  params,
+}: Props): Promise<Metadata> => {
+  const uploadedImages: ImageS3[] = await getImages();
+  const id = params.id;
+  const photo = uploadedImages.find((p) => p.id === id)!;
+
+  return {
+    title: "Photo | SnapLink",
+    description: `Photo by ${photo.name}`,
+  };
+};
 
 export default async function PhotoPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const uploadedImages = await getImages();
+  const uploadedImages: ImageS3[] = await getImages();
   const id = (await params).id;
   const photo = uploadedImages.find((p) => p.id === id)!;
 

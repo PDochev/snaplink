@@ -4,9 +4,19 @@ import Image from "next/image";
 import NavBar from "@/components/NavBar";
 import FileUpload from "@/components/FileUpload";
 import { getImages } from "./lib/data";
+import { ImageS3 } from "./lib/definitions";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SnapLink",
+  description: "SnapLink is a photo sharing platform",
+
+  // url: "https://snaplink.vercel.app",
+  // type: "website",
+};
 
 export default async function Home() {
-  const uploadedImages = await getImages();
+  const uploadedImages: ImageS3[] = await getImages();
   return (
     <>
       <NavBar />

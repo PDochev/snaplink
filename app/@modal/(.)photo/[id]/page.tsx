@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Modal from "@/components/modal";
 import { getImages } from "@/app/lib/data";
+import { ImageS3 } from "@/app/lib/definitions";
 
 export default async function PhotoModal({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const uploadedImages = await getImages();
+  const uploadedImages: ImageS3[] = await getImages();
   const id = (await params).id;
   const photo = uploadedImages.find((p) => p.id === id)!;
 
