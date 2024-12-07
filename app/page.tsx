@@ -31,7 +31,8 @@ export default async function Home() {
                  (max-width: 1280px) 50vw,
                  (max-width: 1536px) 33vw,
                  25vw"
-                alt={`Uploaded image ${id + 1}`}
+                alt="Image uploaded on SnapLink"
+                placeholder="blur"
                 src={src}
                 className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-square"
                 // style={{ transform: "translate3d(0, 0, 0)" }}

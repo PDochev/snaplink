@@ -11,20 +11,19 @@ export default async function PhotoPage({
   const photo = uploadedImages.find((p) => p.id === id)!;
 
   return (
-    <div className="container mx-auto my-10">
-      <div className="w-1/2 mx-auto">
-        <Image
-          width={720}
-          height={480}
-          alt={"Uploaded image"}
-          sizes="(max-width: 640px) 100vw,
+    <div className="mx-auto max-w-[1960px] p-1 h-svh flex items-center justify-center">
+      <Image
+        width={920}
+        height={480}
+        placeholder="blur"
+        alt="Image uploaded on SnapLink"
+        sizes="(max-width: 640px) 100vw,
                  (max-width: 1280px) 50vw,
                  (max-width: 1536px) 33vw,
                  25vw"
-          src={photo.src}
-          className="transform brightness-110 transition will-change-auto  object-cover aspect-square rounded-md"
-        />
-      </div>
+        src={photo.src}
+        className="transform brightness-110 transition will-change-auto  object-cover aspect-square rounded-md"
+      />
     </div>
   );
 }
