@@ -1,29 +1,29 @@
 import Image from "next/image";
-import wondersImages, { WonderImage } from "../../wonders";
+import { getImages } from "@/app/lib/data";
 
 export default async function PhotoPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const uploadedImages = await getImages();
   const id = (await params).id;
-  const photo: WonderImage = wondersImages.find((p) => p.id === id)!;
+  const photo = uploadedImages.find((p) => p.id === id)!;
+
   return (
     <div className="container mx-auto my-10">
       <div className="w-1/2 mx-auto">
-        <div>
-          <h1 className="text-center text-3xl font-bold my-4">{photo.name}</h1>
-        </div>
         <Image
-          alt={photo.name}
+          width={720}
+          height={480}
+          alt={"Uploaded image"}
+          sizes="(max-width: 640px) 100vw,
+                 (max-width: 1280px) 50vw,
+                 (max-width: 1536px) 33vw,
+                 25vw"
           src={photo.src}
-          className="w-full object-cover aspect-square "
+          className="transform brightness-110 transition will-change-auto  object-cover aspect-square rounded-md"
         />
-
-        <div className="bg-white py-4">
-          <h3>{photo.photographer}</h3>
-          <h3>{photo.location}</h3>
-        </div>
       </div>
     </div>
   );

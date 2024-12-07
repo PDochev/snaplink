@@ -9,7 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.705.0",
+    "@aws-sdk/s3-presigned-post": "^3.705.0",
+    "@aws-sdk/s3-request-presigner": "^3.705.0",
+    "@neondatabase/serverless": "^0.10.4",
     "client-only": "^0.0.1",
+    "nanoid": "^5.0.9",
     "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
