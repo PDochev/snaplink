@@ -11,7 +11,7 @@ export default async function PhotoPage({
   const photo = uploadedImages.find((p) => p.id === id)!;
 
   return (
-    <div className="mx-auto max-w-[1960px] p-1 h-svh flex items-center justify-center">
+    <div className="mx-auto max-w-[1960px] p-1 m- h-svh flex items-center justify-center">
       <Image
         width={920}
         height={480}
