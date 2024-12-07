@@ -15,7 +15,6 @@ export default async function PhotoPage({
       <Image
         width={920}
         height={480}
-        placeholder="blur"
         alt="Image uploaded on SnapLink"
         sizes="(max-width: 640px) 100vw,
                  (max-width: 1280px) 50vw,

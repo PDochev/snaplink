@@ -17,7 +17,6 @@ export default async function PhotoModal({
         width={720}
         height={480}
         alt="Image uploaded on SnapLink"
-        placeholder="blur"
         sizes="(max-width: 640px) 100vw,
                  (max-width: 1280px) 50vw,
                  (max-width: 1536px) 33vw,
