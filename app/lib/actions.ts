@@ -1,48 +1,36 @@
 "use server";
 
-import { S3Client } from "@aws-sdk/client-s3";
-import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
-import { nanoid } from "nanoid";
+import { revalidatePath } from "next/cache";
+import { neon } from "@neondatabase/serverless";
 
-export async function onFileUpload(formData: FormData) {
+export async function uploadImage(objectUrl: string) {
+  if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not defined");
+
+  const sql = neon(process.env.DATABASE_URL);
+
   try {
-    const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
-    const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
-    if (!accessKeyId || !secretAccessKey) {
-      throw new Error("AWS credentials are not set");
-    }
+    // Create the user table with an auto-incrementing primary key
+    await sql(`
+      CREATE TABLE IF NOT EXISTS "user" (
+        id SERIAL PRIMARY KEY,
+        name TEXT,
+        image TEXT
+      )
+    `);
 
-    const client = new S3Client({
-      region: process.env.AWS_REGION,
-      credentials: {
-        accessKeyId,
-        secretAccessKey,
-      },
-    });
+    // Mock call to get the user
+    const user = "snaplink_S3"; // Replace with actual user logic
 
-    const { url, fields } = await createPresignedPost(client, {
-      Bucket: process.env.AWS_BUCKET_NAME || "",
-      Key: nanoid(),
-    });
+    // Insert the user name and the reference to the image into the user table
+    await sql('INSERT INTO "user" (name, image) VALUES ($1, $2)', [
+      user,
+      objectUrl,
+    ]);
 
-    const formDataS3 = new FormData();
-    Object.entries(fields).forEach(([key, value]) => {
-      formDataS3.append(key, value);
-    });
-    formDataS3.append("file", formData.get("file") as string);
-    const response = await fetch(url, {
-      method: "POST",
-      body: formDataS3,
-    });
-
-    const textResponse = await response.text();
-    console.log(textResponse);
-    if (response.ok) {
-      console.log("File uploaded successfully");
-    } else {
-      console.error("Some error occured during file upload");
-    }
-  } catch (err) {
-    console.error(err);
+    // Revalidate the home path
+    revalidatePath("/");
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    throw error;
   }
 }
