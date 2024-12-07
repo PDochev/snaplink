@@ -22,7 +22,7 @@ export default async function PhotoModal({
                  (max-width: 1536px) 33vw,
                  25vw"
         src={photo.src}
-        className="transform brightness-110 transition will-change-auto  object-cover aspect-square"
+        className="transform brightness-110 transition will-change-auto object-cover aspect-square"
       />
     </Modal>
   );

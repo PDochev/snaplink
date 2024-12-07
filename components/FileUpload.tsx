@@ -43,7 +43,7 @@ export default function FileUpload() {
   };
 
   return (
-    <div>
+    <div className="mb-6">
       <input
         onChange={uploadFile}
         type="file"
