@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getImages } from "@/app/lib/data";
 import { ImageS3 } from "@/app/lib/definitions";
 import { Metadata } from "next";
+import BackButton from "@/components/BackButton";
 
 type Props = {
   params: { id: string };
@@ -31,17 +32,20 @@ export default async function PhotoPage({
 
   return (
     <div className="mx-auto max-w-[1960px] p-1 m- h-svh flex items-center justify-center">
-      <Image
-        width={920}
-        height={480}
-        alt="Image uploaded on SnapLink"
-        sizes="(max-width: 640px) 100vw,
+      <div className="relative">
+        <Image
+          width={920}
+          height={480}
+          alt="Image uploaded on SnapLink"
+          sizes="(max-width: 640px) 100vw,
                  (max-width: 1280px) 50vw,
                  (max-width: 1536px) 33vw,
                  25vw"
-        src={photo.src}
-        className="transform brightness-110 transition will-change-auto  object-cover aspect-square rounded-md"
-      />
+          src={photo.src}
+          className=" retransform brightness-110 transition will-change-auto  object-cover aspect-square rounded-md"
+        />
+        <BackButton />
+      </div>
     </div>
   );
 }

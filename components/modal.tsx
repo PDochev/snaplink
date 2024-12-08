@@ -9,6 +9,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
+import { X } from "lucide-react";
 
 export default function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -57,8 +58,10 @@ export default function Modal({ children }: { children: React.ReactNode }) {
         {children}
         <button
           onClick={onDismiss}
-          className="absolute top-2 right-2 w-12 h-12 bg-transparent border-none rounded-2xl cursor-pointer flex items-center justify-center font-medium text-2xl after:content-['x'] after:text-black hover:bg-slate-100"
-        />
+          className="absolute top-2 left-2 p-2 bg-white/50 border-none rounded-full cursor-pointer   hover:bg-white/75"
+        >
+          <X />
+        </button>
       </dialog>
     </div>,
     document.getElementById("modal-root")!
