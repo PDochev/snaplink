@@ -55,7 +55,7 @@ export default function FileUpload() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center mt-4 mb-6 mx-auto">
+    <div className="flex flex-col justify-center items-center mt-4 mb-12 mx-auto">
       <div className="flex gap-4 items-center">
         <Input
           onChange={handleFileChange}
