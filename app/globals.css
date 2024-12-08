@@ -123,9 +123,9 @@ body {
   }
 }
 
-html {
+/* html {
   scroll-behavior: smooth;
-}
+} */
 
 @layer base {
   * {
