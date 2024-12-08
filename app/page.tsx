@@ -21,10 +21,8 @@ export default async function Home() {
     <>
       <NavBar />
       <main className="mx-auto max-w-[1960px] p-4">
-        <div>
-          <h1 className="text-center text-3xl font-bold my-4">
-            Welcome to SnapLink
-          </h1>
+        <div className="flex justify-center items-center">
+          <h1 className="text-3xl font-bold my-4">Welcome to SnapLink</h1>
         </div>
         <FileUpload />
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
