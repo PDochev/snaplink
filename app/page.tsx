@@ -10,7 +10,6 @@ import ScrollTopButton from "@/components/ScrollTopButton";
 
 export const metadata: Metadata = {
   title: "SnapLink",
-  description: "SnapLink is a photo sharing platform",
 
   // url: "https://snaplink.vercel.app",
   // type: "website",
