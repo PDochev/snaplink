@@ -5,7 +5,7 @@ export async function getImages() {
   const sql = neon(process.env.DATABASE_URL);
 
   const images = await sql<Array<{ id: number; name: string; image: string }>>`
-    SELECT id, name, image FROM "user"
+    SELECT id, name, image FROM "user" ORDER BY id DESC
   `;
 
   return images.map((img) => ({

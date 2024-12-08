@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     `);
 
     // Mock call to get the user
-    const user = "plamen"; // getUser();
+    const user = "snaplink_S3"; // getUser();
 
     // Insert the user name and the reference to the image into the user table
     await sql('INSERT INTO "user" (name, image) VALUES ($1, $2)', [
