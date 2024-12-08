@@ -11,7 +11,7 @@ export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
   const uploadedImages: ImageS3[] = await getImages();
-  const id = params.id;
+  const id = (await params).id;
   const photo = uploadedImages.find((p) => p.id === id)!;
 
   return {

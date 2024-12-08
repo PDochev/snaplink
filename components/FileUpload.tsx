@@ -1,7 +1,10 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { uploadImage } from "@/app/lib/actions";
+import { Loader2 } from "lucide-react";
 
 export default function FileUpload() {
   const [isUploading, setIsUploading] = useState(false);
@@ -54,23 +57,22 @@ export default function FileUpload() {
   return (
     <div className="flex flex-col justify-center items-center mt-4 mb-6 mx-auto">
       <div className="flex gap-4 items-center">
-        <input
+        <Input
           onChange={handleFileChange}
           type="file"
           name="file"
           disabled={isUploading}
         />
-        <button
-          onClick={uploadFile}
-          disabled={isUploading || !selectedFile}
-          className={`px-4 py-2 rounded cursor-pointer ${
-            isUploading
-              ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-              : "bg-blue-500 text-white hover:bg-blue-600"
-          }`}
-        >
-          {isUploading ? "Uploading..." : "Upload"}
-        </button>
+        <Button onClick={uploadFile} disabled={isUploading || !selectedFile}>
+          {isUploading ? (
+            <>
+              {" "}
+              <Loader2 className="animate-spin" /> Please Wait
+            </>
+          ) : (
+            "Upload"
+          )}
+        </Button>
       </div>
     </div>
   );
