@@ -8,7 +8,7 @@ export default function ScrollTopButton() {
       onClick={() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}
-      className="fixed bottom-4 right-4 z-50 p-4 bg-white/60 rounded-full shadow-md"
+      className="fixed bottom-4 right-4 z-50 p-4 bg-white/50 rounded-full shadow-md hover:bg-white/75"
     >
       <Image
         src="/arrow-up.svg"
