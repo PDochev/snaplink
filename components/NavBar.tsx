@@ -13,7 +13,7 @@ export default function NavBar() {
             height={24}
             priority
           />
-          <Link className=" font-medium" href="/">
+          <Link className="font-medium border-b border-black" href="/">
             SnapLink
           </Link>
         </li>
