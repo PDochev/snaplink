@@ -6,6 +6,7 @@ import FileUpload from "@/components/FileUpload";
 import { getImages } from "./lib/data";
 import { ImageS3 } from "./lib/definitions";
 import { Metadata } from "next";
+import ScrollTopButton from "@/components/ScrollTopButton";
 
 export const metadata: Metadata = {
   title: "SnapLink",
@@ -43,12 +44,13 @@ export default async function Home() {
                  25vw"
                 alt="Image uploaded on SnapLink"
                 src={src}
-                className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-square"
+                className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-square shadow-sm"
                 // style={{ transform: "translate3d(0, 0, 0)" }}
               />
             </Link>
           ))}
         </div>
+        <ScrollTopButton />
       </main>
     </>
   );
