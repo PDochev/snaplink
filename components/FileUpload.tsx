@@ -9,16 +9,37 @@ import { Loader2 } from "lucide-react";
 export default function FileUpload() {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  // Allowed image MIME types
+  const ALLOWED_IMAGE_TYPES = [
+    "image/jpeg",
+    "image/png",
+    "image/gif",
+    "image/webp",
+    "image/svg+xml",
+  ];
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file: File | null | undefined = e.target.files?.[0];
-    setSelectedFile(file || null);
+
+    if (file) {
+      // Check if the file is an image
+      if (ALLOWED_IMAGE_TYPES.includes(file.type)) {
+        setSelectedFile(file);
+        setError(null);
+      } else {
+        setSelectedFile(null);
+        setError("Please upload only image files (JPEG, PNG, GIF, WEBP, SVG)");
+      }
+    }
   };
 
   const uploadFile = async () => {
     if (!selectedFile) return;
 
     setIsUploading(true);
+    setError(null);
 
     const reader = new FileReader();
     reader.onload = async (event) => {
@@ -46,6 +67,7 @@ export default function FileUpload() {
           await uploadImage(signedUrl.split("?")[0]);
         } catch (error) {
           console.error("Upload failed", error);
+          setError("Failed to upload image");
         } finally {
           setIsUploading(false);
         }
@@ -56,23 +78,27 @@ export default function FileUpload() {
 
   return (
     <div className="flex flex-col justify-center items-center mt-4 mb-12 mx-auto">
-      <div className="flex gap-4 items-center">
-        <Input
-          onChange={handleFileChange}
-          type="file"
-          name="file"
-          disabled={isUploading}
-        />
-        <Button onClick={uploadFile} disabled={isUploading || !selectedFile}>
-          {isUploading ? (
-            <>
-              {" "}
-              <Loader2 className="animate-spin" /> Please Wait
-            </>
-          ) : (
-            "Upload"
-          )}
-        </Button>
+      <div className="flex flex-col gap-2 items-center">
+        <div className="flex gap-4 items-center">
+          <Input
+            onChange={handleFileChange}
+            type="file"
+            name="file"
+            accept="image/*"
+            disabled={isUploading}
+          />
+          <Button onClick={uploadFile} disabled={isUploading || !selectedFile}>
+            {isUploading ? (
+              <>
+                {" "}
+                <Loader2 className="animate-spin" /> Please Wait
+              </>
+            ) : (
+              "Upload"
+            )}
+          </Button>
+        </div>
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
       </div>
     </div>
   );
