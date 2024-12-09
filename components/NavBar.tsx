@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function NavBar() {
   return (
     <nav className="sticky top-0 z-10">
-      <ul className="w-full flex flex-row h-16 justify-start items-center  p-4 bg-white/60 ">
+      <ul className="w-full flex flex-row h-16 justify-start items-center p-4 bg-black/60 ">
         <li className="flex gap-2">
           <Image
             src="/camera.svg"
@@ -13,7 +13,7 @@ export default function NavBar() {
             height={24}
             priority
           />
-          <Link className="font-medium border-b border-black" href="/">
+          <Link className="font-medium border-b border-white" href="/">
             SnapLink
           </Link>
         </li>
