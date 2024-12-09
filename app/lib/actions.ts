@@ -11,7 +11,7 @@ export async function uploadImage(objectUrl: string) {
   try {
     // Create the user table with an auto-incrementing primary key
     await sql(`
-      CREATE TABLE IF NOT EXISTS "user" (
+      CREATE TABLE IF NOT EXISTS "photos" (
         id SERIAL PRIMARY KEY,
         name TEXT,
         image TEXT
@@ -22,7 +22,7 @@ export async function uploadImage(objectUrl: string) {
     const user = "snaplink_S3"; // Replace with actual user logic
 
     // Insert the user name and the reference to the image into the user table
-    await sql('INSERT INTO "user" (name, image) VALUES ($1, $2)', [
+    await sql('INSERT INTO "photos" (name, image) VALUES ($1, $2)', [
       user,
       objectUrl,
     ]);
