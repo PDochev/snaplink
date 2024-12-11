@@ -81,6 +81,7 @@ export default function FileUpload() {
       <div className="flex flex-col gap-2 items-center">
         <div className="flex gap-4 items-center">
           <Input
+          className="w-48 sm:w-full"
             onChange={handleFileChange}
             type="file"
             name="file"
