@@ -48,11 +48,11 @@ export default function Modal({ children }: { children: React.ReactNode }) {
     <div
       ref={overlay}
       onClick={onClick}
-      className="fixed inset-0 z-10 flex items-center justify-center bg-black/50 "
+      className="fixed inset-0 z-10 flex items-center justify-center bg-black/50 backdrop-blur-2xl"
     >
       <dialog
         ref={dialogRef}
-        className="fixed inset-0 z-30 backdrop-blur-2xl w-4/5 max-w-lg sm:max-w-2xl border-none rounded-md "
+        className="fixed z-50 flex aspect-[3/2] w-full max-w-7xl items-center wide:h-full xl:taller-than-854:h-auto"
         onClose={onDismiss}
       >
         {children}
