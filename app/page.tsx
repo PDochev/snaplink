@@ -29,17 +29,13 @@ export default async function Home() {
         <FileUpload />
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1">
           {uploadedImages.map(({ id, src }) => (
-            <Link
-              className="after:content group cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight"
-              key={id}
-              href={`/photo/${id}`}
-            >
+            <Link className="cursor-zoom-in" key={id} href={`/photo/${id}`}>
               <Image
-                width={568}
-                height={319}
+                width={573}
+                height={322}
                 alt="Image uploaded on SnapLink"
                 src={src}
-                className="brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-[16/9] shadow-sm"
+                className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9] shadow-sm"
               />
             </Link>
           ))}

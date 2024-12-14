@@ -20,18 +20,34 @@ export default function FileUpload() {
     "image/svg+xml",
   ];
 
+  const MAX_FILE_SIZE_MB = 10;
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file: File | null | undefined = e.target.files?.[0];
 
     if (file) {
-      // Check if the file is an image
+      // Check the file size
+      if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        setSelectedFile(null); // Clear any previously selected file
+        setError(
+          `File size must be less than ${MAX_FILE_SIZE_MB} MB. Your file is ${(
+            file.size /
+            (1024 * 1024)
+          ).toFixed(2)} MB.`
+        );
+        return;
+      }
+
+      // Check if the file type is allowed
       if (ALLOWED_IMAGE_TYPES.includes(file.type)) {
         setSelectedFile(file);
-        setError(null);
+        setError(null); // Clear any previous error
       } else {
         setSelectedFile(null);
-        setError("Please upload only image files (JPEG, PNG, GIF, WEBP, SVG)");
+        setError("Please upload only image files (JPEG, PNG, GIF, WEBP, SVG).");
       }
+    } else {
+      setSelectedFile(null);
     }
   };
 
@@ -81,7 +97,7 @@ export default function FileUpload() {
       <div className="flex flex-col gap-2 items-center ">
         <div className="flex gap-4 items-center">
           <Input
-          className="w-48 sm:w-full"
+            className="w-48 sm:w-full"
             onChange={handleFileChange}
             type="file"
             name="file"
