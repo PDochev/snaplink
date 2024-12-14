@@ -78,7 +78,7 @@ export default function FileUpload() {
 
   return (
     <div className="flex flex-col justify-center items-center mt-4 mb-12 mx-auto">
-      <div className="flex flex-col gap-2 items-center">
+      <div className="flex flex-col gap-2 items-center ">
         <div className="flex gap-4 items-center">
           <Input
           className="w-48 sm:w-full"

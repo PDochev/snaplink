@@ -31,10 +31,10 @@ export default async function PhotoPage({
   const photo = uploadedImages.find((p) => p.id === id)!;
 
   return (
-    <div className="mx-auto max-w-[1960px] p-1 m- h-svh flex items-center justify-center">
+    <div className="mx-auto max-w-[1960px]  h-svh flex items-center justify-center">
       <div className="relative">
         <Image
-          width={920}
+          width={1280}
           height={480}
           alt="Image uploaded on SnapLink"
           sizes="(max-width: 640px) 100vw,
@@ -42,7 +42,7 @@ export default async function PhotoPage({
                  (max-width: 1536px) 33vw,
                  25vw"
           src={photo.src}
-          className=" retransform brightness-110 transition will-change-auto  object-cover aspect-square rounded-md"
+          className="retransform aspect-[3/2] brightness-110 transition will-change-auto  object-cover "
         />
         <BackButton />
       </div>

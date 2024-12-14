@@ -2,6 +2,8 @@ import Image from "next/image";
 import Modal from "@/components/modal";
 import { getImages } from "@/app/lib/data";
 import { ImageS3 } from "@/app/lib/definitions";
+import ExternalLinkButton from "@/components/ExternalLinkButton";
+import DownloadButton from "@/components/DownloadButton";
 
 export default async function PhotoModal({
   params,
@@ -23,8 +25,10 @@ export default async function PhotoModal({
                  (max-width: 1536px) 33vw,
                  25vw"
         src={photo.src}
-        className="w-full max-h-full transform brightness-110 transition will-change-auto object-cover "
+        className="w-full h-full transform brightness-110 transition will-change-auto object-cover "
       />
+      <ExternalLinkButton link={photo.src} />
+      <DownloadButton url={photo.src} />
     </Modal>
   );
 }
