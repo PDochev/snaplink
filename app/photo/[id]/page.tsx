@@ -43,7 +43,7 @@ export default async function PhotoPage({
                  (max-width: 1536px) 33vw,
                  25vw"
           src={photo.src}
-          className="retransform aspect-[3/2] brightness-110 transition will-change-auto  object-cover "
+          className=" aspect-[3/2] brightness-110 transition will-change-auto  object-cover "
         />
         <BackButton />
         <DownloadButton url={photo.src} />

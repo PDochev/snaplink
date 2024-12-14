@@ -39,7 +39,7 @@ export default async function Home() {
                 height={319}
                 alt="Image uploaded on SnapLink"
                 src={src}
-                className="transform brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-[16/9] shadow-sm"
+                className="brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-[16/9] shadow-sm"
               />
             </Link>
           ))}
