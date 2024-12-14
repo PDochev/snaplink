@@ -38,10 +38,6 @@ export default async function PhotoPage({
           width={1280}
           height={480}
           alt="Image uploaded on SnapLink"
-          sizes="(max-width: 640px) 100vw,
-                 (max-width: 1280px) 50vw,
-                 (max-width: 1536px) 33vw,
-                 25vw"
           src={photo.src}
           className=" aspect-[3/2] brightness-110 transition will-change-auto  object-cover "
         />
