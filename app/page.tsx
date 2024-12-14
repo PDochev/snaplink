@@ -40,7 +40,6 @@ export default async function Home() {
                 alt="Image uploaded on SnapLink"
                 src={src}
                 className="transform brightness-90 transition will-change-auto group-hover:brightness-110 object-cover aspect-[16/9] shadow-sm"
-                // style={{ transform: "translate3d(0, 0, 0)" }}
               />
             </Link>
           ))}
