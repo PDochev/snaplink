@@ -3,6 +3,7 @@ import { getImages } from "@/app/lib/data";
 import { ImageS3 } from "@/app/lib/definitions";
 import { Metadata } from "next";
 import BackButton from "@/components/BackButton";
+import DownloadButton from "@/components/DownloadButton";
 
 type Props = {
   params: { id: string };
@@ -45,6 +46,7 @@ export default async function PhotoPage({
           className="retransform aspect-[3/2] brightness-110 transition will-change-auto  object-cover "
         />
         <BackButton />
+        <DownloadButton url={photo.src} />
       </div>
     </div>
   );
