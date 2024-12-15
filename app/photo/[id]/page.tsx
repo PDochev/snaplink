@@ -39,7 +39,7 @@ export default async function PhotoPage({
           height={480}
           alt="Image uploaded on SnapLink"
           src={photo.src}
-          className=" aspect-[3/2] brightness-110 transition will-change-auto  object-cover "
+          className=" aspect-[3/2] brightness-110 transition will-change-auto object-cover "
         />
         <BackButton />
         <DownloadButton url={photo.src} />

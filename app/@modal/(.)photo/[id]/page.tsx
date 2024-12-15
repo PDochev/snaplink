@@ -21,7 +21,7 @@ export default async function PhotoModal({
         height={480}
         alt="Image uploaded on SnapLink"
         src={photo.src}
-        className="w-full h-full transform brightness-110 transition will-change-auto object-cover "
+        className="w-full h-full transform brightness-110 transition will-change-auto object-cover"
       />
       <ExternalLinkButton link={photo.src} />
       <DownloadButton url={photo.src} />

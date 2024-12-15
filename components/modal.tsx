@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { createPortal } from "react-dom";
-import { X } from "lucide-react";
+import CloseButton from "./CloseButton";
 
 export default function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -56,12 +56,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
         onClose={onDismiss}
       >
         {children}
-        <button
-          onClick={onDismiss}
-          className="absolute top-2 left-2 p-2 bg-white/50 border-none rounded-full cursor-pointer hover:bg-white/75"
-        >
-          <X />
-        </button>
+        <CloseButton onDismiss={onDismiss} />
       </dialog>
     </div>,
     document.getElementById("modal-root")!

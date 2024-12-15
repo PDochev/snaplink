@@ -20,13 +20,13 @@ export default function FileUpload() {
     "image/svg+xml",
   ];
 
+  // Allowed file size in MB
   const MAX_FILE_SIZE_MB = 10;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file: File | null | undefined = e.target.files?.[0];
 
     if (file) {
-      // Check the file size
       if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         setSelectedFile(null); // Clear any previously selected file
         setError(
@@ -38,7 +38,6 @@ export default function FileUpload() {
         return;
       }
 
-      // Check if the file type is allowed
       if (ALLOWED_IMAGE_TYPES.includes(file.type)) {
         setSelectedFile(file);
         setError(null); // Clear any previous error
@@ -54,8 +53,8 @@ export default function FileUpload() {
   const uploadFile = async () => {
     if (!selectedFile) return;
 
-    setIsUploading(true);
-    setError(null);
+    setIsUploading(true); // Indicate upload has started
+    setError(null); // Clear any previous error
 
     const reader = new FileReader();
     reader.onload = async (event) => {
@@ -70,12 +69,12 @@ export default function FileUpload() {
           const { signedUrl } = await res.json();
 
           // Upload to S3
-          const uploadResponse = await fetch(signedUrl, {
+          const S3Response = await fetch(signedUrl, {
             body: new Blob([fileData], { type: selectedFile.type }),
             method: "PUT",
           });
 
-          if (!uploadResponse.ok) {
+          if (!S3Response.ok) {
             throw new Error("Upload failed");
           }
 

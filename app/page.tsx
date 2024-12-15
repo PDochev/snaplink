@@ -8,6 +8,8 @@ import { ImageS3 } from "./lib/definitions";
 import { Metadata } from "next";
 import ScrollTopButton from "@/components/ScrollTopButton";
 
+// export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "SnapLink",
 
@@ -35,7 +37,7 @@ export default async function Home() {
                 height={322}
                 alt="Image uploaded on SnapLink"
                 src={src}
-                className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9] shadow-sm"
+                className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9]"
               />
             </Link>
           ))}
