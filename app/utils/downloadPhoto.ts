@@ -16,7 +16,6 @@ export default function downloadPhoto(url: string) {
       return response.blob();
     })
     .then((blob) => {
-      // Create a blob URL
       const blobUrl = window.URL.createObjectURL(blob);
 
       // Create a temporary anchor element to trigger download
@@ -24,7 +23,6 @@ export default function downloadPhoto(url: string) {
       link.href = blobUrl;
       link.download = filename;
 
-      // Append to body, click, and remove
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
