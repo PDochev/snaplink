@@ -26,6 +26,7 @@ export default function Loading() {
             className="text-gray-900"
           ></path>
         </svg>
+        <h1>Loading..</h1>
       </div>
     </div>
   );
