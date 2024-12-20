@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { neon } from "@neondatabase/serverless";
+import { User } from "./definitions";
 
 export async function uploadImage(objectUrl: string) {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not defined");
@@ -35,11 +36,7 @@ export async function uploadImage(objectUrl: string) {
   }
 }
 
-export async function createUser(user: {
-  name: string;
-  email: string;
-  image: string;
-}) {
+export async function createUser(user: User) {
   if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not defined");
 
   const sql = neon(process.env.DATABASE_URL);
