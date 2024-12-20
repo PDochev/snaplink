@@ -24,7 +24,7 @@ export default async function SignIn() {
     <div className="flex items-center  w-full h-svh">
       <section className="lg:w-1/2 flex flex-col items-center justify-center mx-auto gap-4">
         <Image src="/camera.svg" alt="SnapLink Logo" width={100} height={100} />
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+        <h1 className="scroll-m-20 border-b pb-2 text-4xl font-extrabold tracking-tight lg:text-5xl">
           SnapLink
         </h1>
         <h2 className="font-medium">Login to use SnapLink</h2>

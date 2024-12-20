@@ -9,7 +9,11 @@ export function SignOut() {
         await signOut();
       }}
     >
-      <Button className="w-full" variant="ghost" type="submit">
+      <Button
+        className="flex items-center justify-center w-full"
+        variant="ghost"
+        type="submit"
+      >
         Sign Out
       </Button>
     </form>
