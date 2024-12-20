@@ -14,3 +14,4 @@ export async function getImages() {
     src: img.image,
   }));
 }
+

@@ -3,3 +3,9 @@ export type ImageS3 = {
   name: string;
   src: string;
 };
+
+export type User = {
+  name: string;
+  email: string;
+  image: string;
+};
