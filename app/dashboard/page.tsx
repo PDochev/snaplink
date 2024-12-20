@@ -7,6 +7,8 @@ import { getImages } from "../lib/data";
 import { ImageS3 } from "../lib/definitions";
 import { Metadata } from "next";
 import ScrollTopButton from "@/components/ScrollTopButton";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 // export const dynamic = "force-dynamic";
 
@@ -18,6 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  const session = await auth();
+  if (!session) redirect("/login");
+
+  const user = session.user;
   const uploadedImages: ImageS3[] = await getImages();
   return (
     <>
@@ -31,7 +37,11 @@ export default async function Home() {
         <FileUpload />
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1">
           {uploadedImages.map(({ id, src }) => (
-            <Link className="cursor-zoom-in" key={id} href={`/dashboard/photo/${id}`}>
+            <Link
+              className="cursor-zoom-in"
+              key={id}
+              href={`/dashboard/photo/${id}`}
+            >
               <Image
                 width={573}
                 height={322}

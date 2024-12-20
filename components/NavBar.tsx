@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import UserAvatar from "./auth/UserAvatar";
 
 export default function NavBar() {
   return (
@@ -16,6 +17,8 @@ export default function NavBar() {
           <Link className="font-medium " href="/">
             SnapLink
           </Link>
+
+          <UserAvatar />
         </li>
       </ul>
     </nav>
