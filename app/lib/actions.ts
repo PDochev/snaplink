@@ -43,20 +43,20 @@ export async function createUser(user: User) {
 
   try {
     // Create the users table if it doesn't exist
-    await sql(`
+    await sql`
       CREATE TABLE IF NOT EXISTS "users" (
-        id SERIAL PRIMARY KEY,
-        name TEXT NOT NULL UNIQUE,
-        email TEXT NOT NULL UNIQUE,
-        image TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT NOW()
-      )
-    `);
-
+      id SERIAL PRIMARY KEY,
+      name TEXT NOT NULL UNIQUE,
+      email TEXT NOT NULL UNIQUE,
+      image TEXT NOT NULL,
+      created_at TIMESTAMP DEFAULT NOW()
+    )
+  `;
     // Check if the user already exists
-    const existingUser = await sql('SELECT id FROM "users" WHERE email = $1', [
-      user.email,
-    ]);
+    const existingUser = await sql`
+      SELECT id FROM "users" 
+      WHERE email = ${user.email}
+    `;
 
     if (existingUser.length > 0) {
       console.log("User already exists:", existingUser[0].id);
@@ -64,11 +64,10 @@ export async function createUser(user: User) {
     }
 
     // Insert the user if they don't exist
-    await sql('INSERT INTO "users" (name, email, image) VALUES ($1, $2, $3)', [
-      user.name,
-      user.email,
-      user.image,
-    ]);
+    await sql`
+    INSERT INTO "users" (name, email, image) 
+    VALUES (${user.name}, ${user.email}, ${user.image})
+  `;
     console.log("User created:", user.email);
   } catch (error) {
     console.error("Error creating user:", error);
