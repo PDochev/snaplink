@@ -4,6 +4,8 @@ import { ImageS3 } from "@/app/lib/definitions";
 import { Metadata } from "next";
 import BackButton from "@/components/BackButton";
 import DownloadButton from "@/components/DownloadButton";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: { id: string };
@@ -12,6 +14,9 @@ type Props = {
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
+  const session = await auth();
+  if (!session) redirect("/login");
+  
   const uploadedImages: ImageS3[] = await getImages();
   const id = (await params).id;
   const photo = uploadedImages.find((p) => p.id === id)!;
