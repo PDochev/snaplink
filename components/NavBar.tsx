@@ -5,7 +5,7 @@ import UserAvatar from "./auth/UserAvatar";
 export default function NavBar() {
   return (
     <nav className="sticky top-0 z-10">
-      <ul className="w-full flex flex-row h-16 justify-start items-center p-4">
+      <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
         <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-black/60">
           <Image
             src="/camera.svg"
@@ -17,7 +17,8 @@ export default function NavBar() {
           <Link className="font-medium " href="/">
             SnapLink
           </Link>
-
+        </li>
+        <li>
           <UserAvatar />
         </li>
       </ul>
