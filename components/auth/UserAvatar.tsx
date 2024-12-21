@@ -23,23 +23,23 @@ export default async function UserAvatar() {
             <Image
               width={48}
               height={48}
-              src={user?.image ?? "camera.svg"}
+              src={user?.image ?? "/camera.svg"}
               alt="Your profile picture"
             />
             <AvatarFallback>{user?.name?.at(0)}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="mx-4 p-2 bg-primary text-secondary">
-          <div className="flex  items-center gap-2 ">
+          <div className="flex items-center gap-2 ">
             <Avatar className="flex">
               <Image
                 width={48}
                 height={48}
-                src={user?.image ?? "camera.svg"}
+                src={user?.image ?? "/camera.svg"}
                 alt="Your profile picture"
               />
             </Avatar>
-            <div className="">
+            <div>
               <small className="text-sm font-medium leading-none">
                 {user.name}
               </small>

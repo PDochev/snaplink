@@ -33,6 +33,8 @@ export default async function Home() {
     }
   }
 
+  console.log("session", session);
+
   // const user = session.user;
   const uploadedImages: ImageS3[] = await getImages();
   const emptyLibrary = uploadedImages.length === 0;
