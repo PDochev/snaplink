@@ -50,7 +50,9 @@ export default async function Home() {
         <FileUpload />
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1">
           {emptyLibrary ? (
-            <div>No images </div>
+            <div className="flex items-center justify-center">
+              Your Library is empty. Start uploading images.
+            </div>
           ) : (
             uploadedImages.map(({ id, src }) => (
               <Link

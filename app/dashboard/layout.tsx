@@ -13,12 +13,10 @@ export default function DashboardLayout({
   modal: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-        {modal}
-        <div id="modal-root" />
-      </body>
-    </html>
+    <>
+      {children}
+      {modal}
+      <div id="modal-root" />
+    </>
   );
 }

@@ -16,7 +16,7 @@ export const generateMetadata = async ({
 }: Props): Promise<Metadata> => {
   const session = await auth();
   if (!session) redirect("/login");
-  
+
   const uploadedImages: ImageS3[] = await getImages();
   const id = (await params).id;
   const photo = uploadedImages.find((p) => p.id === id)!;
