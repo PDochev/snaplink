@@ -54,7 +54,7 @@ export default async function Home() {
         </div>
         <FileUpload userId={userId} />
         {emptyLibrary && (
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center mx-auto text-sm md:text-lg text-gray-500 ">
             Your Library is empty. Start uploading images.
           </div>
         )}

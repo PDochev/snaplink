@@ -9,7 +9,7 @@ export async function getImagesByUserId(userId: number) {
     SELECT id, name, image 
     FROM "photos" 
     WHERE user_id = ${userId} 
-    ORDER BY id DESC
+    ORDER BY created_at DESC
   `) as Array<{ id: number; name: string; image: string }>;
 
   return images.map((img) => ({

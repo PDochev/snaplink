@@ -10,8 +10,7 @@ export async function uploadImage(objectUrl: string, userId: number) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
-    // Ensure the photos table exists with the user relationship
-    await sql(`
+    await sql`
       CREATE TABLE IF NOT EXISTS "photos" (
         id SERIAL PRIMARY KEY,
         name TEXT,
@@ -19,7 +18,7 @@ export async function uploadImage(objectUrl: string, userId: number) {
         user_id INT REFERENCES "users"(id) ON DELETE CASCADE,
         created_at TIMESTAMP DEFAULT NOW()
       )
-    `);
+    `;
 
     // Fetch the username from the users table
     const userResult = await sql`
@@ -33,10 +32,7 @@ export async function uploadImage(objectUrl: string, userId: number) {
     const userName = userResult[0].name;
 
     // Insert the image with the associated user ID and username
-    await sql(
-      'INSERT INTO "photos" (name, image, user_id) VALUES ($1, $2, $3)',
-      [userName, objectUrl, userId]
-    );
+    await sql`INSERT INTO "photos" (name, image, user_id) VALUES (${userName}, ${objectUrl}, ${userId})`;
 
     // Revalidate the home path
     revalidatePath("/");
