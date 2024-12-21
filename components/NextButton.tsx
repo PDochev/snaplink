@@ -1,14 +1,17 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { Button } from "./ui/button";
 
 export default function NextButton({ onNext }: { onNext: () => void }) {
   return (
-    <button
+    <Button
+      variant="outline"
+      size="icon"
       onClick={onNext}
-      className="absolute bottom-240 right-2 p-2 bg-white/50 border-none text-black rounded-full cursor-pointer hover:bg-white/75"
+      className="absolute bottom-240 right-2 bg-white/50 border-none rounded-full cursor-pointer hover:bg-white/75"
     >
       <ArrowRight />
-    </button>
+    </Button>
   );
 }

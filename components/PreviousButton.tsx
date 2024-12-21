@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowLeft } from "lucide-react";
+import { Button } from "./ui/button";
 
 export default function PreviousButton({
   onPrevious,
@@ -8,11 +9,13 @@ export default function PreviousButton({
   onPrevious: () => void;
 }) {
   return (
-    <button
+    <Button
+      variant="outline"
+      size="icon"
       onClick={onPrevious}
-      className="absolute bottom-240 left-2 p-2 bg-white/50 border-none text-black rounded-full cursor-pointer hover:bg-white/75"
+      className="absolute bottom-240 left-2 bg-white/50 border-none rounded-full cursor-pointer hover:bg-white/75"
     >
       <ArrowLeft />
-    </button>
+    </Button>
   );
 }

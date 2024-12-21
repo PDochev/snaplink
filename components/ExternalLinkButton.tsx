@@ -1,14 +1,17 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
+import { Button } from "./ui/button";
 
 export default function ExternalLinkButton({ link }: { link: string }) {
   return (
-    <button
+    <Button
+      variant="outline"
+      size="icon"
       onClick={() => window.open(link, "_blank")}
-      className="absolute top-2 right-16 p-2 bg-white/50 border-none text-black  rounded-full cursor-pointer  hover:bg-white/75"
+      className="absolute top-2 right-16 bg-white/50 border-none rounded-full cursor-pointer hover:bg-white/75"
     >
       <ExternalLink />
-    </button>
+    </Button>
   );
 }
