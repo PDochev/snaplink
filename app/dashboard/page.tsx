@@ -9,6 +9,8 @@ import { Metadata } from "next";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { createUser } from "../lib/actions";
+import { User } from "../lib/definitions";
 
 // export const dynamic = "force-dynamic";
 
@@ -22,6 +24,14 @@ export const metadata: Metadata = {
 export default async function Home() {
   const session = await auth();
   if (!session) redirect("/login");
+
+  if (session && session.user) {
+    try {
+      await createUser(session.user as User);
+    } catch (error) {
+      console.error("Error saving user:", error);
+    }
+  }
 
   // const user = session.user;
   const uploadedImages: ImageS3[] = await getImages();

@@ -42,7 +42,6 @@ export async function createUser(user: User) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
-    // Create the users table if it doesn't exist
     await sql`
       CREATE TABLE IF NOT EXISTS "users" (
       id SERIAL PRIMARY KEY,
@@ -52,15 +51,16 @@ export async function createUser(user: User) {
       created_at TIMESTAMP DEFAULT NOW()
     )
   `;
+
     // Check if the user already exists
     const existingUser = await sql`
       SELECT id FROM "users" 
-      WHERE email = ${user.email}
+      WHERE LOWER(email) = LOWER(${user.email})
     `;
 
     if (existingUser.length > 0) {
       console.log("User already exists:", existingUser[0].id);
-      return; // Exit if the user exists
+      return;
     }
 
     // Insert the user if they don't exist
