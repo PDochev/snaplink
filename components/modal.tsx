@@ -14,7 +14,7 @@ import CloseButton from "./CloseButton";
 export default function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const dialogRef = useRef<ElementRef<"dialog">>(null);
-  const overlay = useRef<HTMLDivElement>(null);
+  const overlayWindowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!dialogRef.current?.open) {
@@ -37,7 +37,10 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 
   const onClick: MouseEventHandler = useCallback(
     (e) => {
-      if (e.target === overlay.current || e.target === dialogRef.current) {
+      if (
+        e.target === overlayWindowRef.current ||
+        e.target === dialogRef.current
+      ) {
         if (onDismiss) onDismiss();
       }
     },
@@ -46,7 +49,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
 
   return createPortal(
     <div
-      ref={overlay}
+      ref={overlayWindowRef}
       onClick={onClick}
       className="fixed inset-0 z-10 flex items-center justify-center bg-black/50 backdrop-blur-2xl"
     >

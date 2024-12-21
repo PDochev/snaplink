@@ -28,7 +28,7 @@ export default function FileUpload() {
 
     if (file) {
       if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
-        setSelectedFile(null); // Clear any previously selected file
+        setSelectedFile(null);
         setError(
           `File size must be less than ${MAX_FILE_SIZE_MB} MB. Your file is ${(
             file.size /
@@ -40,7 +40,7 @@ export default function FileUpload() {
 
       if (ALLOWED_IMAGE_TYPES.includes(file.type)) {
         setSelectedFile(file);
-        setError(null); // Clear any previous error
+        setError(null);
       } else {
         setSelectedFile(null);
         setError("Please upload only image files (JPEG, PNG, GIF, WEBP, SVG).");
@@ -65,8 +65,8 @@ export default function FileUpload() {
         presignedURL.searchParams.set("contentType", selectedFile.type);
 
         try {
-          const res = await fetch(presignedURL.toString());
-          const { signedUrl } = await res.json();
+          const response = await fetch(presignedURL.toString());
+          const { signedUrl } = await response.json();
 
           // Upload to S3
           const S3Response = await fetch(signedUrl, {
@@ -106,7 +106,6 @@ export default function FileUpload() {
           <Button onClick={uploadFile} disabled={isUploading || !selectedFile}>
             {isUploading ? (
               <>
-                {" "}
                 <Loader2 className="animate-spin" /> Please Wait
               </>
             ) : (
