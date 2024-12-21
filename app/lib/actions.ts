@@ -16,7 +16,8 @@ export async function uploadImage(objectUrl: string, userId: number) {
         id SERIAL PRIMARY KEY,
         name TEXT,
         image TEXT,
-        user_id INT REFERENCES "users"(id) ON DELETE CASCADE
+        user_id INT REFERENCES "users"(id) ON DELETE CASCADE,
+        created_at TIMESTAMP DEFAULT NOW()
       )
     `);
 
