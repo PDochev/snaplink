@@ -11,7 +11,7 @@ export default async function Home() {
   );
 }
 
-export function LoginPageForm() {
+function LoginPageForm() {
   return (
     <section className="lg:w-1/2 flex flex-col items-center justify-center mx-auto gap-4">
       <Image src="/camera.svg" alt="SnapLink Logo" width={100} height={100} />
@@ -36,7 +36,7 @@ export function LoginPageForm() {
   );
 }
 
-export function LoginPageSideImage() {
+function LoginPageSideImage() {
   return (
     <section className="hidden w-1/2 lg:flex">
       <div className="w-full h-svh group overflow-hidden flex">

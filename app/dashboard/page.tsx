@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import NavBar from "@/components/NavBar";
 import FileUpload from "@/components/FileUpload";
-import { getImages } from "../lib/data";
+import { getImagesByUserId } from "../lib/data";
 import { ImageS3 } from "../lib/definitions";
 import { Metadata } from "next";
 import ScrollTopButton from "@/components/ScrollTopButton";
@@ -25,18 +25,23 @@ export default async function Home() {
   const session = await auth();
   if (!session) redirect("/login");
 
+  let userId: number | null = null;
+
   if (session && session.user) {
     try {
-      await createUser(session.user as User);
+      userId = await createUser(session.user as User);
     } catch (error) {
       console.error("Error saving user:", error);
     }
   }
 
+  if (!userId) {
+    throw new Error("Failed to retrieve user ID");
+  }
+
   console.log("session", session);
 
-  // const user = session.user;
-  const uploadedImages: ImageS3[] = await getImages();
+  const uploadedImages: ImageS3[] = await getImagesByUserId(userId);
   const emptyLibrary = uploadedImages.length === 0;
   return (
     <>
@@ -47,13 +52,14 @@ export default async function Home() {
             Welcome to SnapLink
           </h1>
         </div>
-        <FileUpload />
+        <FileUpload userId={userId} />
+        {emptyLibrary && (
+          <div className="flex items-center justify-center">
+            Your Library is empty. Start uploading images.
+          </div>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1">
-          {emptyLibrary ? (
-            <div className="flex items-center justify-center">
-              Your Library is empty. Start uploading images.
-            </div>
-          ) : (
+          {!emptyLibrary &&
             uploadedImages.map(({ id, src }) => (
               <Link
                 className="cursor-zoom-in"
@@ -68,8 +74,7 @@ export default async function Home() {
                   className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9]"
                 />
               </Link>
-            ))
-          )}
+            ))}
         </div>
         <ScrollTopButton />
       </main>

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { uploadImage } from "@/app/lib/actions";
 import { Loader2 } from "lucide-react";
 
-export default function FileUpload() {
+export default function FileUpload({ userId }: { userId: number }) {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -79,7 +79,7 @@ export default function FileUpload() {
           }
 
           // Call server action to save image
-          await uploadImage(signedUrl.split("?")[0]);
+          await uploadImage(signedUrl.split("?")[0], userId);
         } catch (error) {
           console.error("Upload failed", error);
           setError("Failed to upload image");
