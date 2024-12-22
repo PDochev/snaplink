@@ -30,9 +30,12 @@ export async function uploadImage(objectUrl: string, userId: number) {
       throw new Error(`No user found with ID: ${userId}`);
     }
 
+    // Extract the username from the result
+    // userResult[0] returns an array of objects, so we need to access the first object
+    // and then access the name property
     const userName = userResult[0].name;
 
-    // Insert the image with the associated user ID and username
+    // Insert the image with the associated user ID , username and image URL
     await sql`INSERT INTO "photos" (name, image, user_id) VALUES (${userName}, ${objectUrl}, ${userId})`;
 
     // Revalidate the home path
@@ -51,7 +54,7 @@ export async function deleteImage(imageId: string) {
   const sql = neon(process.env.DATABASE_URL);
 
   try {
-    // We are first fetching the S3 image URL from the database
+    // We are first fetching the S3 image URL from the database, using the imageId
     const image = await sql`
       SELECT image FROM "photos" WHERE id = ${imageId}
     `;
@@ -60,38 +63,56 @@ export async function deleteImage(imageId: string) {
       throw new Error("Image not found");
     }
 
-    // We then extract the key from the S3 URL
-
+    // Extracts the image URL from the result
     // image[0] returns and array of objects, so we need to access the first object
     // and then access the image property
-    const s3Url = new URL(image[0].image);
-    // new URL returns an object with the URL properties (protocol,hostname,pathname,etc)
-    // We are interested in the pathname property which contains the key
-    // We remove the leading slash from the pathname
-    // s3Url.pathname gives use and img key like /img.jpg
-    // s3Url.pathname.slice(1) removes the leading slash and gives us img.jpg
+    const imageUrl = image[0].image;
 
-    const key = s3Url.pathname.slice(1); // Remove leading slash
+    // Check if this image URL is used by other photos
+    // We are counting the number of photos that have the same image URL
+    // Counts how many photo entries in the database use exactly the same image URL
+    // If count > 1, it means other users have the same image
+    const sharedImages = await sql`
+      SELECT COUNT(*) as count 
+      FROM "photos" 
+      WHERE image = ${imageUrl}
+    `;
 
-    // Initialize S3 client
-    const s3Client = new S3Client({
-      region: "eu-west-2",
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-      },
-    });
-
-    // Delete from S3
-    const deleteCommand = new DeleteObjectCommand({
-      Bucket: process.env.AWS_S3_BUCKET_NAME,
-      Key: key,
-    });
-
-    await s3Client.send(deleteCommand);
-
-    // Delete from database
+    // Delete the specific photo entry from the database
+    // This only removes the database reference, not the actual S3 file
+    // This happens regardless of whether the image is shared or not
     await sql`DELETE FROM "photos" WHERE id = ${imageId}`;
+
+    // Only delete from S3 if this was the last reference to the image
+    // If count is 1 or less, it means no other users are using this image
+    // We can then delete the image from S3
+    if (sharedImages[0].count <= 1) {
+      // Initialize S3 client
+      const s3Client = new S3Client({
+        region: "eu-west-2",
+        credentials: {
+          accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+        },
+      });
+
+      // We then extract the key from the S3 URL
+      const s3Url = new URL(imageUrl);
+      // new URL returns an object with the URL properties (protocol,hostname,pathname,etc)
+      // We are interested in the pathname property which contains the key
+      const key = s3Url.pathname.slice(1); // Remove leading slash
+      // We remove the leading slash from the pathname
+      // s3Url.pathname gives use and img key like /img.jpg
+      // s3Url.pathname.slice(1) removes the leading slash and gives us img.jpg
+
+      // Delete from S3
+      const deleteCommand = new DeleteObjectCommand({
+        Bucket: process.env.AWS_S3_BUCKET_NAME,
+        Key: key,
+      });
+
+      await s3Client.send(deleteCommand);
+    }
 
     // Revalidate the page
     revalidatePath("/dashboard");
@@ -120,17 +141,21 @@ export async function createUser(user: User): Promise<number> {
     `;
 
     // Check if the user already exists
+    // We are using the email to check if the user already exists
     const existingUser = await sql`
       SELECT id FROM "users" 
       WHERE LOWER(email) = LOWER(${user.email})
     `;
 
+    // If the user already exists, return the user ID
+    // We are returning the user ID so that we can use it to associate the image with the user
     if (existingUser.length > 0) {
       console.log("User already exists:", existingUser[0].id);
       return existingUser[0].id; // Return existing user ID
     }
 
     // Insert the user if they don't exist
+    // We are returning the user ID so that we can use it to associate the image with the user
     const newUser = await sql`
       INSERT INTO "users" (name, email, image) 
       VALUES (${user.name}, ${user.email}, ${user.image})
@@ -138,6 +163,9 @@ export async function createUser(user: User): Promise<number> {
     `;
 
     console.log("User created:", newUser[0].id);
+    // newUser[0] returns an array of objects, so we need to access the first object
+    // and then access the id property
+    // We are returning the user ID so that we can use it to associate the image with the user
     return newUser[0].id; // Return new user ID
   } catch (error) {
     console.error("Error creating user:", error);

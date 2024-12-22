@@ -32,7 +32,7 @@ export default function DeleteButton({ imageId }: { imageId: string }) {
       await deleteImage(imageId);
       router.refresh();
     } catch (error) {
-      console.error("Failed to delete image:", error);
+      console.error("Error deleting image:", error);
       setError("Failed to delete image. Please try again later.");
     } finally {
       setIsDeleting(false);
