@@ -26,7 +26,7 @@ export default async function AlbumsPage() {
 
         {albums.length === 0 ? (
           <p className="text-gray-500">
-            You haven't created any shared albums yet. Go to your photos and
+            You have not created any shared albums yet. Go to your photos and
             select some to share!
           </p>
         ) : (
@@ -57,7 +57,7 @@ export default async function AlbumsPage() {
                     <p className="text-gray-600 mb-2">{album.description}</p>
                   )}
                   <p className="text-sm text-gray-500 mb-4">
-                    {album.photoCount} photos · Created{" "}
+                    {album.photoCount} photos · Created on{" "}
                     {new Date(album.createdAt).toLocaleDateString()}
                   </p>
 

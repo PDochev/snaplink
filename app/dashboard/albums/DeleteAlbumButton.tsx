@@ -54,9 +54,9 @@ export default function DeleteAlbumButton({
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Album</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete "{albumTitle}"? This action cannot
+              {`Are you sure you want to delete ${albumTitle}? This action cannot
               be undone. The shared link will no longer work, but your original
-              photos will remain in your library.
+              photos will remain in your library.`}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
