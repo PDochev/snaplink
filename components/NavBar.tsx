@@ -23,7 +23,7 @@ export default function NavBar() {
           <div className="gap-2 py-3 px-4 rounded-3xl bg-black/60">
             <Link
               href="/dashboard/albums"
-              className="text-md font-medium transition-colors text-green-400 hover:text-green-400/70"
+              className="text-md font-medium transition-colors text-white hover:text-white/50"
             >
               Albums
             </Link>

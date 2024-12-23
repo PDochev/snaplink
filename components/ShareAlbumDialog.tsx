@@ -58,7 +58,7 @@ export default function ShareAlbumDialog({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Share Selected Photos</Button>
+        <Button variant="outline">Share Photos</Button>
       </DialogTrigger>
       <DialogContent className="bg-primary text-secondary ">
         <DialogHeader>

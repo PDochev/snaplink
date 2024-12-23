@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { SharedAlbum, ImageS3 } from "@/app/lib/definitions";
 import Link from "next/link";
+import ScrollTopButton from "@/components/ScrollTopButton";
 
 export default async function SharedAlbumPage({
   params,
@@ -17,12 +18,10 @@ export default async function SharedAlbumPage({
   }
 
   return (
-    <main className="mx-auto max-w-[1960px] p-4">
-      <div className="mb-8">
+    <main className="mx-auto max-w-[1960px] p-4 mt-8">
+      <div className="mb-8 ">
         <h1 className="text-3xl font-bold mb-2">{album.title}</h1>
-        {album.description && (
-          <p className="text-gray-600">{album.description}</p>
-        )}
+        {album.description && <p className="text-white">{album.description}</p>}
         <p className="text-sm text-gray-500 mt-2">
           Shared by {album.user_name}
         </p>
@@ -42,6 +41,7 @@ export default async function SharedAlbumPage({
             </Link>
           </div>
         ))}
+        <ScrollTopButton />
       </div>
     </main>
   );

@@ -34,9 +34,13 @@ export default function PhotoGrid({
 
   return (
     <>
-      <div className="flex justify-end gap-2 mb-4">
-        <Button onClick={toggleSelectionMode} variant="secondary">
-          {isSelectionMode ? "Cancel Selection" : "Select Photos"}
+      <div className="flex justify-end gap-2 mb-4 mr-4">
+        <Button
+          className="text-xs sm:text-sm"
+          onClick={toggleSelectionMode}
+          variant="secondary"
+        >
+          {isSelectionMode ? "Cancel" : "Select Photos"}
         </Button>
         {isSelectionMode && selectedPhotos.length > 0 && (
           <ShareAlbumDialog
