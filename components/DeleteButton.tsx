@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 export default function DeleteButton({ imageId }: { imageId: string }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const handleDelete = async (e: React.MouseEvent) => {
@@ -29,6 +30,7 @@ export default function DeleteButton({ imageId }: { imageId: string }) {
     try {
       setIsDeleting(true);
       setError(null);
+      setOpen(false);
       await deleteImage(imageId);
       router.refresh();
     } catch (error) {
@@ -40,7 +42,7 @@ export default function DeleteButton({ imageId }: { imageId: string }) {
   };
 
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
