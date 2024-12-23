@@ -9,22 +9,12 @@ import { redirect } from "next/navigation";
 import { getUserIdByEmail } from "@/app/lib/data";
 import { User } from "@/app/lib/definitions";
 
-export const generateMetadata = async ({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> => {
+export const generateMetadata = async (): Promise<Metadata> => {
   const session = await auth();
-  const email: User["email"] = session?.user?.email ?? "";
-  const userId = await getUserIdByEmail(email);
-
-  const uploadedImages: ImageS3[] = await getImagesByUserId(Number(userId));
-  const id = (await params).id;
-  const photo = uploadedImages.find((p) => p.id === id)!;
 
   return {
     title: "Photo | SnapLink",
-    description: `Photo by ${photo.name}`,
+    description: `Photo by ${session?.user?.name}`,
   };
 };
 
