@@ -34,15 +34,15 @@ export default async function AlbumsPage() {
             {albums.map((album) => (
               <div
                 key={album.id}
-                className="overflow-hidden bg-primary shadow-sm"
+                className="overflow-hidden bg-primary shadow-sm rounded-b-md"
               >
-                <div className="aspect-[16/9] relative">
+                <div className="aspect-[16/9] relative ">
                   {album.coverImage ? (
                     <Image
                       src={album.coverImage}
                       alt={album.title}
                       fill
-                      className="object-cover"
+                      className="object-cover rounded-b-3xl"
                     />
                   ) : (
                     <div className="w-full h-full bg-gray-100 flex items-center justify-center">
