@@ -31,13 +31,15 @@ export default async function SharedAlbumPage({
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
         {album.photos.map((photo: ImageS3) => (
           <div key={photo.id} className="relative">
-            <Image
-              width={573}
-              height={322}
-              alt={`Photo by ${album.user_name}`}
-              src={photo.src}
-              className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9] rounded-lg"
-            />
+            <Link href={`/shared/${token}/photo/${photo.id}`}>
+              <Image
+                width={573}
+                height={322}
+                alt={`Photo by ${album.user_name}`}
+                src={photo.src}
+                className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9] rounded-lg"
+              />
+            </Link>
           </div>
         ))}
       </div>

@@ -1,16 +1,14 @@
 import PhotoModalClient from "@/components/PhotoModalClient";
 import { getSharedAlbum } from "@/app/lib/data";
-
-import { getUserIdByEmail } from "@/app/lib/data";
 import { SharedAlbum } from "@/app/lib/definitions";
 
 export default async function PhotoModal({
   params,
 }: {
-  params: Promise<{ share_token: string; id: string }>;
+  params: Promise<{ token: string; id: string }>;
 }) {
   const id = (await params).id;
-  const token = (await params).share_token;
+  const token = (await params).token;
   const album: SharedAlbum | null = await getSharedAlbum(token);
 
   if (!album) {
