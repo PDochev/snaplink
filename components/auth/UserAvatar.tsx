@@ -7,8 +7,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "../ui/button";
 
 export default async function UserAvatar() {
   const session = await auth();

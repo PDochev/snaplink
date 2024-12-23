@@ -172,3 +172,101 @@ export async function createUser(user: User): Promise<number> {
     throw error;
   }
 }
+
+export async function createSharedAlbum(
+  userId: number,
+  title: string,
+  description?: string
+) {
+  if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not defined");
+  const sql = neon(process.env.DATABASE_URL);
+
+  try {
+    // Create shared_albums table if it doesn't exist
+    // We are creating a shared_albums table to store the shared albums
+    // share_token is unique and used for public access to the album
+    // share_token is generated using crypto.randomUUID()
+    await sql`
+      CREATE TABLE IF NOT EXISTS "shared_albums" (
+        id SERIAL PRIMARY KEY,
+        user_id INT REFERENCES "users"(id) ON DELETE CASCADE,
+        title TEXT NOT NULL,
+        description TEXT,
+        share_token TEXT UNIQUE NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW()
+      )
+    `;
+
+    // Create junction table for album photos
+    // Many-to-many relationship between shared_albums and photos
+    // We are creating a junction table to associate photos with the shared album
+    // album_id and photo_id are foreign keys that reference shared_albums and photos tables
+    // We are using a composite primary key to ensure that a photo can only be associated with an album once
+    // This is done by using the PRIMARY KEY (album_id, photo_id) constraint
+    // We are using ON DELETE CASCADE to delete the associated album_photos entries when an album or photo is deleted
+    await sql`
+      CREATE TABLE IF NOT EXISTS "album_photos" (
+        album_id INT REFERENCES "shared_albums"(id) ON DELETE CASCADE,
+        photo_id INT REFERENCES "photos"(id) ON DELETE CASCADE,
+        PRIMARY KEY (album_id, photo_id)
+      )
+    `;
+
+    // Generate a unique share token
+    const shareToken = crypto.randomUUID();
+
+    // Create the album
+    const album = await sql`
+      INSERT INTO "shared_albums" (user_id, title, description, share_token)
+      VALUES (${userId}, ${title}, ${description}, ${shareToken})
+      RETURNING id
+    `;
+
+    return { albumId: album[0].id, shareToken };
+  } catch (error) {
+    console.error("Error creating shared album:", error);
+    throw error;
+  }
+}
+
+export async function addPhotosToAlbum(albumId: number, photoIds: number[]) {
+  if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not defined");
+  const sql = neon(process.env.DATABASE_URL);
+
+  try {
+    // Insert all photo associations in a single query
+    // We are inserting all the photo associations in a single query
+    // We are using unnest() to convert the photoIds array into a set of rows
+    // Ensures that the array is treated as an array of integers (int[]). This is done by casting the array to int[]
+    // This is often necessary for compatibility with PostgreSQL’s unnest function.
+    await sql`
+      INSERT INTO "album_photos" (album_id, photo_id)
+      SELECT ${albumId}, unnest(${photoIds}::int[])
+    `;
+
+    revalidatePath("/dashboard");
+    return { success: true };
+  } catch (error) {
+    console.error("Error adding photos to album:", error);
+    throw error;
+  }
+}
+
+export async function deleteSharedAlbum(albumId: number) {
+  if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not defined");
+  const sql = neon(process.env.DATABASE_URL);
+
+  try {
+    // Delete the album (this will cascade delete album_photos entries)
+    await sql`
+      DELETE FROM "shared_albums"
+      WHERE id = ${albumId}
+    `;
+
+    revalidatePath("/dashboard/albums");
+    return { success: true };
+  } catch (error) {
+    console.error("Error deleting album:", error);
+    throw error;
+  }
+}

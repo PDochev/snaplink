@@ -10,3 +10,12 @@ export type User = {
   email: string;
   image: string;
 };
+
+export type SharedAlbum = {
+  id: string;
+  title: string;
+  description?: string;
+  shareToken: string;
+  user_name: string;
+  photos: ImageS3[];
+};
