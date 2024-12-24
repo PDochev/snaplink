@@ -30,7 +30,10 @@ export default async function SharedAlbumPage({
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
         {album.photos.map((photo: ImageS3) => (
           <div key={photo.id} className="relative">
-            <Link href={`/shared/${token}/photo/${photo.id}`}>
+            <Link
+              className=" cursor-zoom-in "
+              href={`/shared/${token}/photo/${photo.id}`}
+            >
               <Image
                 width={573}
                 height={322}
