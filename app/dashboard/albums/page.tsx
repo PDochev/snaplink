@@ -54,7 +54,7 @@ export default async function AlbumsPage() {
                 <div className="p-4">
                   <h2 className="text-xl font-semibold mb-2">{album.title}</h2>
                   {album.description && (
-                    <p className="text-gray-600 mb-2">{album.description}</p>
+                    <p className="text-white mb-2">{album.description}</p>
                   )}
                   <p className="text-sm text-gray-500 mb-4">
                     {album.photoCount} photos · Created on{" "}
