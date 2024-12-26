@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { createSharedAlbum, addPhotosToAlbum } from "@/app/lib/actions";
+import { useRouter } from "next/navigation";
 
 export default function ShareAlbumDialog({
   userId,
@@ -25,6 +26,7 @@ export default function ShareAlbumDialog({
   const [description, setDescription] = useState("");
   const [shareUrl, setShareUrl] = useState("");
   const [isCreating, setIsCreating] = useState(false);
+  const router = useRouter();
 
   const handleShare = async () => {
     if (!title || selectedPhotos.length === 0) return;
@@ -48,6 +50,7 @@ export default function ShareAlbumDialog({
       const url = `${window.location.origin}/shared/${shareToken}`;
       setShareUrl(url);
       onShare?.(url);
+      router.push(`/dashboard/albums`);
     } catch (error) {
       console.error("Error sharing album:", error);
     } finally {

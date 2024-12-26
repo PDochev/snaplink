@@ -7,8 +7,14 @@ import NavBar from "@/components/NavBar";
 import { getUserIdByEmail } from "@/app/lib/data";
 import CopyLinkButton from "./CopyLinkButton";
 import DeleteAlbumButton from "./DeleteAlbumButton";
+import SearchAlbum from "@/components/SearchAlbum";
+import { getFilteredAlbums } from "@/app/lib/data";
 
-export default async function AlbumsPage() {
+export default async function AlbumsPage(props: {
+  searchParams?: Promise<{
+    query?: string;
+  }>;
+}) {
   const session = await auth();
   if (!session) redirect("/login");
 
@@ -16,7 +22,17 @@ export default async function AlbumsPage() {
   const userId = await getUserIdByEmail(email);
   if (!userId) throw new Error("User not found");
 
-  const albums = await getUserAlbums(userId);
+  const searchParams = await props.searchParams;
+  const query = searchParams?.query || "";
+
+  // First get all user albums to check if the user has any
+  const userAlbums = await getUserAlbums(userId);
+
+  // Only perform search if there are albums and a search query
+  const albums =
+    userAlbums.length > 0 && query
+      ? await getFilteredAlbums(query, userId)
+      : userAlbums;
 
   return (
     <>
@@ -24,17 +40,30 @@ export default async function AlbumsPage() {
       <main className="mx-auto max-w-[1960px] p-4">
         <h1 className="text-3xl font-bold mb-8">My Shared Albums</h1>
 
-        {albums.length === 0 ? (
-          <p className="text-gray-500">
-            You have not created any shared albums yet. Go to your photos and
-            select some to share!
-          </p>
+        {/* Only show search if there are albums */}
+        {userAlbums.length > 0 && (
+          <SearchAlbum placeholder="Search albums by title" />
+        )}
+
+        {userAlbums.length === 0 ? (
+          <div className="text-center mt-8">
+            <p className="text-gray-500">
+              You have not created any shared albums yet. Go to your photos and
+              select some to share!
+            </p>
+          </div>
+        ) : query && albums.length === 0 ? (
+          <div className="text-center mt-8">
+            <p className="text-gray-500">
+              {`No albums found matching "${query}". Try a different search term.`}
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {albums.map((album) => (
               <div
                 key={album.id}
-                className="overflow-hidden bg-primary shadow-sm rounded-b-md"
+                className="overflow-hidden bg-primary shadow-sm"
               >
                 <div className="aspect-[16/9] relative ">
                   {album.coverImage ? (
@@ -65,7 +94,7 @@ export default async function AlbumsPage() {
                     <div className="flex gap-2">
                       <Link
                         href={`/shared/${album.shareToken}`}
-                        className="text-blue-500/90  hover:text-blue-400 text-sm "
+                        className="text-blue-500/90 hover:text-blue-400 text-sm"
                         target="_blank"
                       >
                         View Album

@@ -119,3 +119,40 @@ export async function getUserAlbums(userId: number) {
     throw error;
   }
 }
+
+export async function getFilteredAlbums(query: string, userId: number) {
+  if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is not defined");
+  const sql = neon(process.env.DATABASE_URL);
+
+  try {
+    // Add wildcards to the query for partial matching
+    const searchPattern = `%${query}%`;
+
+    const albums = await sql`
+      SELECT 
+        sa.*,
+        COUNT(ap.photo_id) as photo_count,
+        MIN(p.image) as cover_image
+      FROM shared_albums sa
+      LEFT JOIN album_photos ap ON sa.id = ap.album_id
+      LEFT JOIN photos p ON ap.photo_id = p.id
+      WHERE sa.title ILIKE ${searchPattern}
+      AND sa.user_id = ${userId}
+      GROUP BY sa.id
+      ORDER BY sa.created_at DESC
+    `;
+
+    return albums.map((album) => ({
+      id: album.id,
+      title: album.title,
+      description: album.description,
+      shareToken: album.share_token,
+      photoCount: parseInt(album.photo_count),
+      coverImage: album.cover_image,
+      createdAt: album.created_at,
+    }));
+  } catch (error) {
+    console.error("Error fetching filtered albums:", error);
+    throw error;
+  }
+}
