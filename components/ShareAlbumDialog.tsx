@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { createSharedAlbum, addPhotosToAlbum } from "@/app/lib/actions";
 import { useRouter } from "next/navigation";
+import { Textarea } from "./ui/textarea";
 
 export default function ShareAlbumDialog({
   userId,
@@ -80,11 +81,12 @@ export default function ShareAlbumDialog({
           </div>
           <div className="space-y-2">
             <Label htmlFor="description">Description (optional)</Label>
-            <Input
+            <Textarea
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Enter album description"
+              className="h-24"
             />
           </div>
           {!shareUrl && (
