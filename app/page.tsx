@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Share2, Lock, Cloud } from "lucide-react";
+import { Share2, Cloud, DownloadCloud } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { auth } from "@/auth";
@@ -47,7 +47,7 @@ export default async function LandingPage() {
                 Instantly
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 mb-8 animate-fade-in-up animation-delay-200">
+            <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up animation-delay-200">
               Create beautiful photo albums and share them with friends and
               family in seconds. No complicated setup, just pure simplicity.
             </p>
@@ -108,10 +108,10 @@ export default async function LandingPage() {
                 "Share your photos with anyone, anywhere. Generate unique links in seconds.",
             },
             {
-              icon: Lock,
-              title: "Secure Storage",
+              icon: DownloadCloud,
+              title: "Offline Viewing",
               description:
-                "Your memories are safe with us. Industry-leading security and privacy.",
+                "Save your favorite photos locally to access them even without an internet connection.",
             },
             {
               icon: Cloud,
