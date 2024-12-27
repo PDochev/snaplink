@@ -20,11 +20,8 @@ export default function NavBar() {
         </li>
 
         <li className="flex items-center gap-4">
-          <div className="gap-2 py-3 px-4 rounded-3xl bg-black/60">
-            <Link
-              href="/dashboard/albums"
-              className="text-md font-medium transition-colors text-foreground hover:text-white/70"
-            >
+          <div className="gap-2 py-3 px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black cursor-pointer">
+            <Link href="/dashboard/albums" className="text-md font-medium">
               Albums
             </Link>
           </div>

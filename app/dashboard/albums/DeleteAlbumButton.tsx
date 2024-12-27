@@ -50,7 +50,7 @@ export default function DeleteAlbumButton({
       </Button>
 
       <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-        <AlertDialogContent className="bg-background">
+        <AlertDialogContent className="bg-background w-80 rounded-sm sm:w-full">
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Album</AlertDialogTitle>
             <AlertDialogDescription>
