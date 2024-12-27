@@ -43,7 +43,7 @@ function LoginPageSideImage() {
         <Image
           width={1920}
           height={100}
-          src="/login_pic1.jpg"
+          src="/login_page_img.jpg"
           className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-500 ease-in-out"
           alt="Login Image"
         />
