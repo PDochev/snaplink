@@ -33,7 +33,7 @@ export default async function LandingPage() {
       </nav>
 
       {/* Full-Screen Hero Section */}
-      <div className="min-h-screen flex flex-col justify-center items-center px-6">
+      <div className="min-h-screen mt-20 lg:mt-0 flex flex-col justify-center items-center px-6 ">
         <div className="flex flex-col lg:flex-row items-center gap-12 relative">
           {/* Decorative elements */}
           <div className="absolute top-0 right-0 -z-10 w-72 h-72 bg-green-300 rounded-full blur-3xl opacity-20 animate-pulse"></div>
@@ -65,15 +65,15 @@ export default async function LandingPage() {
 
           {/* Right side image layout */}
           <div className="flex-1 relative mt-12 lg:mt-0">
-            <div className="relative w-full h-[500px] animate-fade-in-up animation-delay-600">
+            <div className="relative w-full  h-[500px] animate-fade-in-up animation-delay-600">
               <Image
                 src="/hero_img.jpg"
                 alt="Gallery preview 1"
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover brightness-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-70"></div>
-              <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md rounded-lg p-4 animate-slide-up">
+              <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md rounded-xl p-4 animate-slide-up">
                 <h3 className="text-white text-xl font-semibold mb-2">
                   Capture the Moment
                 </h3>
@@ -82,12 +82,12 @@ export default async function LandingPage() {
                 </p>
               </div>
             </div>
-            <div className="absolute top-4 -right-4 w-40 h-40 animate-float animation-delay-1000">
+            <div className="absolute hidden lg:block top-4 -right-4 w-40 h-40 animate-float animation-delay-1000">
               <Image
                 src="/camera.svg"
                 alt="Gallery preview 2"
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover brightness-110"
               />
             </div>
           </div>
