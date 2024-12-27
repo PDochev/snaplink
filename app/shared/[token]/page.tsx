@@ -31,7 +31,7 @@ export default async function SharedAlbumPage({
         {album.photos.map((photo: ImageS3) => (
           <div key={photo.id} className="relative">
             <Link
-              className=" cursor-zoom-in "
+              className="cursor-zoom-in"
               href={`/shared/${token}/photo/${photo.id}`}
             >
               <Image
@@ -39,7 +39,7 @@ export default async function SharedAlbumPage({
                 height={322}
                 alt={`Photo by ${album.user_name}`}
                 src={photo.src}
-                className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9] rounded-lg"
+                className="brightness-90 transition will-change-auto hover:brightness-110 object-cover aspect-[16/9] rounded-xl"
               />
             </Link>
           </div>

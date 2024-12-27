@@ -38,7 +38,9 @@ export default async function AlbumsPage(props: {
     <>
       <NavBar />
       <main className="mx-auto max-w-[1960px] p-4">
-        <h1 className="text-3xl font-bold mb-8">My Shared Albums</h1>
+        <h1 className="text-3xl text-center font-bold mb-8">
+          My Shared Albums
+        </h1>
 
         {/* Only show search if there are albums */}
         {userAlbums.length > 0 && (
@@ -59,11 +61,11 @@ export default async function AlbumsPage(props: {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 grid-auto-rows">
             {albums.map((album) => (
               <div
                 key={album.id}
-                className="overflow-hidden bg-primary shadow-sm"
+                className="overflow-hidden bg-zinc-700/20 shadow-sm" // h-fit
               >
                 <div className="aspect-[16/9] relative ">
                   {album.coverImage ? (

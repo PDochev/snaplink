@@ -43,14 +43,14 @@ export default function DeleteAlbumButton({
         variant="outline"
         size="icon"
         onClick={() => setIsOpen(true)}
-        className="text-red-600 hover:text-red-700 border-none p-2 rounded-full hover:bg-red-50 transition-colors"
+        className="text-red-600 hover:text-red-600 border-none p-2 rounded-full hover:bg-red-300 transition-colors"
         aria-label="Delete album"
       >
         <Trash2 className="h-4 w-4" />
       </Button>
 
       <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-        <AlertDialogContent className="bg-primary">
+        <AlertDialogContent className="bg-background">
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Album</AlertDialogTitle>
             <AlertDialogDescription>
@@ -64,7 +64,7 @@ export default function DeleteAlbumButton({
             <AlertDialogAction
               onClick={handleDelete}
               disabled={isDeleting}
-              className="bg-red-600 hover:bg-red-700 text-white"
+              className="bg-red-500/90 hover:bg-red-700/80 text-white"
             >
               {isDeleting ? "Deleting..." : "Delete Album"}
             </AlertDialogAction>

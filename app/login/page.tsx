@@ -15,7 +15,7 @@ function LoginPageForm() {
   return (
     <section className="lg:w-1/2 flex flex-col items-center justify-center mx-auto gap-4">
       <Image src="/camera.svg" alt="SnapLink Logo" width={100} height={100} />
-      <h1 className="scroll-m-20 border-b pb-2 text-4xl font-extrabold tracking-tight lg:text-5xl">
+      <h1 className="scroll-m-20 border-b border-foreground pb-2 text-4xl font-extrabold tracking-tight lg:text-5xl">
         SnapLink
       </h1>
       <h2 className="font-medium">Login to use SnapLink</h2>
@@ -27,7 +27,7 @@ function LoginPageForm() {
           });
         }}
       >
-        <Button type="submit">
+        <Button variant="secondary" className="bg-zinc-900" type="submit">
           <Image src="/google.svg" alt="Google Logo" width={20} height={20} />
           Continue with Google
         </Button>

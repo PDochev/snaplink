@@ -13,7 +13,7 @@ export default function PreviousButton({
       variant="outline"
       size="icon"
       onClick={onPrevious}
-      className="absolute bottom-240 left-2 bg-white/50 border-none rounded-full cursor-pointer hover:bg-white/75"
+      className="absolute bottom-240 left-2 bg-white/50 text-black hover:text-black border-none rounded-full cursor-pointer hover:bg-white/75"
     >
       <ArrowLeft />
     </Button>

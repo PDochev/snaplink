@@ -29,7 +29,7 @@ export default async function UserAvatar() {
             <AvatarFallback>{user?.name?.at(0)}</AvatarFallback>
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="mx-4 p-2 bg-primary text-secondary">
+        <DropdownMenuContent className="mx-4 p-2  text-foreground">
           <div className="flex items-center gap-2 ">
             <Avatar className="flex">
               <Image

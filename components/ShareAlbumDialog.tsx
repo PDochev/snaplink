@@ -63,7 +63,7 @@ export default function ShareAlbumDialog({
       <DialogTrigger asChild>
         <Button variant="outline">Share Photos</Button>
       </DialogTrigger>
-      <DialogContent className="bg-primary text-secondary ">
+      <DialogContent className="bg-background text-foreground">
         <DialogHeader>
           <DialogTitle>Create Shared Album</DialogTitle>
         </DialogHeader>
@@ -75,6 +75,7 @@ export default function ShareAlbumDialog({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter album title"
+              className=""
             />
           </div>
           <div className="space-y-2">
@@ -88,7 +89,6 @@ export default function ShareAlbumDialog({
           </div>
           {!shareUrl && (
             <Button
-              variant="secondary"
               onClick={handleShare}
               disabled={isCreating || !title || selectedPhotos.length === 0}
             >

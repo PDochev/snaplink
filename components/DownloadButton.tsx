@@ -10,7 +10,7 @@ export default function DownloadButton({ url }: { url: string }) {
       variant="outline"
       size="icon"
       onClick={() => downloadPhoto(url)}
-      className="absolute top-2 right-2 bg-white/50 border-none text-black rounded-full cursor-pointer hover:bg-white/75"
+      className="absolute top-2 right-2 bg-white/50 border-none text-black hover:text-black rounded-full cursor-pointer hover:bg-white/75"
     >
       <Download />
     </Button>
