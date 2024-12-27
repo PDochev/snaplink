@@ -14,7 +14,7 @@ export default function Error({ error }: { error: Error }) {
   return (
     <div className="flex flex-col items-center justify-center h-screen space-y-4">
       <h1 className="scroll-m-20 text-3xl md:text-4xl font-extrabold tracking-tight lg:text-4xl mt-8 mb-8 text-red-500">
-        Error fetching photo
+        An error occured
       </h1>
       <Button
         onClick={() => router.back()}

@@ -65,14 +65,13 @@ export default async function LandingPage() {
 
           {/* Right side image layout */}
           <div className="flex-1 relative mt-12 lg:mt-0">
-            <div className="relative w-full  h-[500px] animate-fade-in-up animation-delay-600">
+            <div className="relative w-full h-[500px] animate-fade-in-up animation-delay-600">
               <Image
                 src="/hero_img.jpg"
-                alt="Gallery preview 1"
+                alt="Image of people laughing"
                 fill
                 className="object-cover brightness-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-70"></div>
               <div className="absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md rounded-xl p-4 animate-slide-up">
                 <h3 className="text-white text-xl font-semibold mb-2">
                   Capture the Moment
