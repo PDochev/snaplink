@@ -6,7 +6,7 @@ export default function NavBar() {
   return (
     <nav className="sticky top-0 z-10">
       <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
-        <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-background/60">
+        <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black">
           <Image
             src="/camera.svg"
             alt="SnapLink Logo"
