@@ -75,14 +75,6 @@ export default async function LandingPage() {
                 </p>
               </div>
             </div>
-            <div className="absolute top-4  -right-2 md:-right-4 w-20 h-20 md:w-40 md:h-40 animate-float animation-delay-1000 ">
-              <Image
-                src="/camera.svg"
-                alt="An Illustration of a camera"
-                fill
-                className="object-cover brightness-110"
-              />
-            </div>
           </div>
         </div>
       </div>

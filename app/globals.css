@@ -68,10 +68,6 @@ html {
     animation: colorChange 5s infinite alternate;
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
   .animate-slide-up {
     animation: slideUp 0.5s ease-out forwards;
   }
@@ -112,16 +108,6 @@ html {
     }
     100% {
       color: #d84961;
-    }
-  }
-
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
     }
   }
 
