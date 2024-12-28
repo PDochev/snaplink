@@ -22,7 +22,7 @@ export default async function LandingPage() {
             preload="auto"
             muted
             poster="/poster-video.png"
-            className="absolute min-w-full min-h-full w-auto h-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
+            className="absolute min-w-full min-h-full w-auto  h-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
             style={{ aspectRatio: "16/9" }}
           >
             <source src="/hero-video.mp4" type="video/mp4" />
@@ -97,7 +97,7 @@ export default async function LandingPage() {
                 alt="Image of people laughing"
                 width={1600}
                 height={900}
-                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                className="h-full w-full object-cover brightness-105 group-hover:scale-105 transition-transform duration-500 ease-in-out"
               />
             </div>
             <div className="col-span-10 lg:col-span-6 group overflow-hidden rounded-xl">
@@ -106,7 +106,7 @@ export default async function LandingPage() {
                 alt="Image of people laughing"
                 width={1600}
                 height={900}
-                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                className="h-full w-full object-cover brightness-105 group-hover:scale-105 transition-transform duration-500 ease-in-out"
               />
             </div>
             <div className="col-span-10 lg:col-span-6 group overflow-hidden rounded-xl">
@@ -115,7 +115,7 @@ export default async function LandingPage() {
                 alt="Image of people laughing"
                 width={1600}
                 height={900}
-                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                className="h-full w-full object-cover brightness-105 group-hover:scale-105 transition-transform duration-500 ease-in-out"
               />
             </div>
             <div className="col-span-10 lg:col-span-4 group overflow-hidden rounded-xl">
@@ -124,7 +124,7 @@ export default async function LandingPage() {
                 width={1600}
                 height={900}
                 alt="Image of people laughing"
-                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                className="h-full w-full object-cover brightness-105 group-hover:scale-105 transition-transform duration-500 ease-in-out"
               />
             </div>
           </div>
