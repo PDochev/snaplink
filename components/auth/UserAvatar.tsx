@@ -1,6 +1,6 @@
 import { auth } from "../../auth";
 import Image from "next/image";
-import { SignOut } from "./signout-button";
+import { SignOut } from "./SignOut";
 import {
   DropdownMenu,
   DropdownMenuContent,

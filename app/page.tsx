@@ -22,15 +22,14 @@ export default async function LandingPage() {
             preload="auto"
             muted
             poster="/poster-video.png"
-            className="absolute min-w-full min-h-full w-auto  h-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
-            style={{ aspectRatio: "16/9" }}
+            className="absolute min-w-full min-h-full w-auto  h-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover aspect-[16/9]"
           >
             <source src="/hero-video.mp4" type="video/mp4" />
           </video>
         </div>
 
         {/* Navigation */}
-        <nav className="relative z-20">
+        <nav className="fixed top-0 left-0 right-0 z-50 ">
           <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
             <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-black/60 backdrop-blur-sm hover:bg-white hover:text-black">
               <Image
@@ -53,7 +52,7 @@ export default async function LandingPage() {
         </nav>
 
         {/* Hero Content */}
-        <div className="relative z-10 h-[calc(100vh-4rem)] flex flex-col justify-center items-center px-8">
+        <main className="relative z-10 h-[calc(100vh-4rem)] flex flex-col justify-center items-center px-8">
           <div className="text-center rounded-xl p-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up">
               Share Your Moments,
@@ -77,7 +76,7 @@ export default async function LandingPage() {
               </Link>
             </div>
           </div>
-        </div>
+        </main>
       </div>
 
       {/* Rest of the content */}
@@ -87,10 +86,7 @@ export default async function LandingPage() {
           <h2 className="text-3xl font-semibold text-center mb-12">
             Capture Life&apos;s Moments
           </h2>
-          <div
-            id="bento-div"
-            className="w-full grid grid-cols-10 max-auto auto-rows-[35rem] gap-4 p-1"
-          >
+          <div className="w-full grid grid-cols-10 max-auto auto-rows-[35rem] gap-4 p-1">
             <div className="col-span-10 lg:col-span-4 group overflow-hidden rounded-xl">
               <Image
                 src="/image1.jpg"
