@@ -8,118 +8,189 @@ import { auth } from "@/auth";
 export default async function LandingPage() {
   const session = await auth();
   const user = session?.user;
-  return (
-    <div className="min-h-screen mx-auto max-w-[1960px] bg-gradient-to-b from-background to-background/80">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-10">
-        <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
-          <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black">
-            <Image
-              src="/camera.svg"
-              alt="SnapLink Logo"
-              width={24}
-              height={24}
-              priority
-            />
-            <Link className="font-medium" href="/">
-              SnapLink
-            </Link>
-          </li>
-          <li className="flex items-center gap-4">
-            <div className="gap-2 py-3 px-4 rounded-3xl bg-black/60 hover:bg-white hover:text-black hover:cursor-pointer">
-              <Link href={user ? "/dashboard" : "/login"}>Get Started</Link>
-            </div>
-          </li>
-        </ul>
-      </nav>
 
-      {/* Full-Screen Hero Section */}
-      <div className="min-h-screen mt-20 lg:mt-0 flex flex-col justify-center items-center px-8 ">
-        <div className="flex flex-col lg:flex-row items-center gap-12 relative">
-          <div className="flex-1 text-center lg:text-left">
+  return (
+    <div className="min-h-screen mx-auto max-w-[1960px]">
+      {/* Hero Section with Video */}
+      <div className="relative h-screen">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            className="absolute min-w-full min-h-full w-auto h-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
+            style={{ aspectRatio: "16/9" }}
+          >
+            <source src="/hero-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        {/* Navigation */}
+        <nav className="relative z-20">
+          <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
+            <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-black/60 backdrop-blur-sm hover:bg-white hover:text-black">
+              <Image
+                src="/camera.svg"
+                alt="SnapLink Logo"
+                width={24}
+                height={24}
+                priority
+              />
+              <Link className="font-medium" href="/">
+                SnapLink
+              </Link>
+            </li>
+            <li className="flex items-center gap-4">
+              <div className="gap-2 py-3 px-4 rounded-3xl bg-black/60 backdrop-blur-sm hover:bg-white hover:text-black hover:cursor-pointer">
+                <Link href={user ? "/dashboard" : "/login"}>Get Started</Link>
+              </div>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Hero Content */}
+        <div className="relative z-10 h-[calc(100vh-4rem)] flex flex-col justify-center items-center px-8">
+          <div className="text-center rounded-xl p-4">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up">
               Share Your Moments,
-              <span className="animate-color-change"> Instantly</span>
+              <span className="text-primary animate-color-change">
+                {" "}
+                Instantly
+              </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 mb-8 animate-fade-in-up animation-delay-200">
               Create beautiful photo albums and share them with friends and
-              family in seconds. No complicated setup, just pure simplicity.
+              family in seconds.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start animate-fade-in-up animation-delay-400">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-400">
               <Link href={user ? "/dashboard" : "/login"}>
-                <Button>Start Sharing</Button>
+                <Button size="lg">Start Sharing</Button>
               </Link>
               <Link href="#features">
-                <Button variant="outline" className="sm:w-auto">
+                <Button variant="outline" size="lg">
                   Learn More
                 </Button>
               </Link>
             </div>
           </div>
-
-          {/* Right side image layout */}
-          <div className="flex-1 relative md:mt-12 lg:mt-0">
-            <div className="relative min-w-[365px] sm:w-[600px] md:w-[700px] lg:w-full  h-[500px] animate-fade-in-up animation-delay-600">
-              <Image
-                src="/hero_img.jpg"
-                alt="Image of people laughing"
-                fill
-                className="object-cover brightness-110 rounded-xl"
-              />
-              <div className="lg:absolute absolute bottom-4 left-4 right-4 bg-white/10 backdrop-blur-md rounded-xl p-4 animate-slide-up">
-                <h3 className="text-white text-sm md:text-lg font-semibold mb-2">
-                  Capture the Moment
-                </h3>
-                <p className="text-white/80 text-sm">
-                  Share your adventures with loved ones instantly.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* Features Section */}
-      <section id="features" className="py-16">
-        <h2 className="text-3xl font-semibold text-center mb-16 animate-fade-in-up">
-          Why Choose SnapLink?
-        </h2>
-        <div className="grid md:grid-cols-3 gap-12">
-          {[
-            {
-              icon: Share2,
-              title: "Easy Sharing",
-              description:
-                "Share your photos with anyone, anywhere. Generate unique links in seconds.",
-            },
-            {
-              icon: DownloadCloud,
-              title: "Offline Viewing",
-              description:
-                "Save your favorite photos locally to access them even without an internet connection.",
-            },
-            {
-              icon: Cloud,
-              title: "Cloud Access",
-              description:
-                "Access your photos from any device, anytime. Always in sync.",
-            },
-          ].map((feature, index) => (
-            <div key={index} className="text-center p-6">
-              <div className="flex justify-center mb-6">
-                <feature.icon className="h-12 w-12" />
-              </div>
-              <h3 className="text-xl mb-4">{feature.title}</h3>
-              <p className="text-gray-400">{feature.description}</p>
+      {/* Rest of the content */}
+      <div className="bg-background">
+        {/* Image Grid Section */}
+        <section className="py-16 px-4">
+          <h2 className="text-3xl font-semibold text-center mb-12">
+            Capture Life&apos;s Moments
+          </h2>
+          <div
+            id="bento-div"
+            className="w-full grid grid-cols-10 max-auto auto-rows-[35rem] gap-4 p-1"
+          >
+            <div className="col-span-10 lg:col-span-4 group overflow-hidden rounded-xl">
+              <Image
+                src="/image1.jpg"
+                alt="Image of people laughing"
+                width={1600}
+                height={900}
+                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+              />
             </div>
-          ))}
-        </div>
-      </section>
-      {/* Footer */}
-      <footer className="bg-background text-white py-12 text-center mt-20">
-        <p>&copy; 2024 SnapLink. All rights reserved.</p>
-        <p>Plamen Dochev</p>
-      </footer>
+            <div className="col-span-10 lg:col-span-6 group overflow-hidden rounded-xl">
+              <Image
+                src="/image2.jpg"
+                alt="Image of people laughing"
+                width={1600}
+                height={900}
+                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+              />
+            </div>
+            <div className="col-span-10 lg:col-span-6 group overflow-hidden rounded-xl">
+              <Image
+                src="/image3.jpg"
+                alt="Image of people laughing"
+                width={1600}
+                height={900}
+                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+              />
+            </div>
+            <div className="col-span-10 lg:col-span-4 group overflow-hidden rounded-xl">
+              <Image
+                src="/image4.jpg"
+                width={1600}
+                height={900}
+                alt="Image of people laughing"
+                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section id="features" className="py-16">
+          <h2 className="text-3xl font-semibold text-center mb-16 animate-fade-in-up">
+            Why Choose SnapLink?
+          </h2>
+          <div className="grid md:grid-cols-3 gap-12 px-4">
+            {[
+              {
+                icon: Share2,
+                title: "Easy Sharing",
+                description:
+                  "Share your photos with anyone, anywhere. Generate unique links in seconds.",
+              },
+              {
+                icon: DownloadCloud,
+                title: "Offline Viewing",
+                description:
+                  "Save your favorite photos locally to access them even without an internet connection.",
+              },
+              {
+                icon: Cloud,
+                title: "Cloud Access",
+                description:
+                  "Access your photos from any device, anytime. Always in sync.",
+              },
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="text-center p-6 rounded-xl hover:bg-white/5 transition-colors"
+              >
+                <div className="flex justify-center mb-6">
+                  <feature.icon className="h-12 w-12" />
+                </div>
+                <h3 className="text-xl mb-4">{feature.title}</h3>
+                <p className="text-gray-400">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="py-16 px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Start Sharing?
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Join thousands of users who are already enjoying the simplicity
+              and power of SnapLink.
+            </p>
+            <Link href={user ? "/dashboard" : "/login"}>
+              <Button size="lg" className="text-lg px-8 py-6">
+                Get Started Now
+              </Button>
+            </Link>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-background text-white py-12 text-center mt-20">
+          <p>&copy; 2024 SnapLink. All rights reserved.</p>
+          <p>Plamen Dochev</p>
+        </footer>
+      </div>
     </div>
   );
 }

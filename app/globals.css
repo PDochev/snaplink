@@ -101,13 +101,13 @@ html {
 
   @keyframes colorChange {
     0% {
-      color: #d84961;
+      color: #ffffff;
     }
     50% {
-      color: #9dd4fc;
+      color: #000000;
     }
     100% {
-      color: #d84961;
+      color: #ffffff;
     }
   }
 
