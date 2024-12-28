@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Modal from "@/components/Modal";
+import Modal from "./Modal";
 import ExternalLinkButton from "@/components/ExternalLinkButton";
 import DownloadButton from "@/components/DownloadButton";
 import NextButton from "@/components/NextButton";
