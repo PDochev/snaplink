@@ -18,7 +18,10 @@ export default async function LandingPage() {
           <video
             autoPlay
             loop
+            playsInline
+            preload="auto"
             muted
+            poster="/poster-video.png"
             className="absolute min-w-full min-h-full w-auto h-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover"
             style={{ aspectRatio: "16/9" }}
           >
