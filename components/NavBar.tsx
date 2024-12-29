@@ -2,11 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 import UserAvatar from "./auth/UserAvatar";
 
-export default function NavBar() {
+export default async function NavBar() {
   return (
     <nav className="sticky top-0 z-10">
       <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
-        <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black">
+        <Link
+          href="/dashboard"
+          className="flex items-center font-medium justify-center gap-2 py-3 px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black"
+        >
           <Image
             src="/camera.svg"
             alt="SnapLink Logo"
@@ -14,17 +17,15 @@ export default function NavBar() {
             height={24}
             priority
           />
-          <Link className="font-medium" href="/dashboard">
-            SnapLink
-          </Link>
-        </li>
-
+          SnapLink
+        </Link>
         <li className="flex items-center gap-4">
-          <div className="gap-2 py-3 px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black cursor-pointer">
-            <Link href="/dashboard/albums" className="text-md font-medium">
-              Albums
-            </Link>
-          </div>
+          <Link
+            href="/dashboard/albums"
+            className="gap-2 py-3 text-md font-medium px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black cursor-pointer"
+          >
+            Albums
+          </Link>
           <UserAvatar />
         </li>
       </ul>

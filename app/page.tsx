@@ -31,7 +31,10 @@ export default async function LandingPage() {
         {/* Navigation */}
         <nav className="fixed top-0 left-0 right-0 z-50 ">
           <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
-            <li className="flex items-center justify-center gap-2 py-3 px-4 rounded-3xl bg-black/60 backdrop-blur-sm hover:bg-white hover:text-black">
+            <Link
+              href="/"
+              className="flex items-center justify-center font-medium gap-2 py-3 px-4 rounded-3xl bg-black/60 backdrop-blur-sm hover:bg-white hover:text-black"
+            >
               <Image
                 src="/camera.svg"
                 alt="SnapLink Logo"
@@ -39,14 +42,15 @@ export default async function LandingPage() {
                 height={24}
                 priority
               />
-              <Link className="font-medium" href="/">
-                SnapLink
-              </Link>
-            </li>
+              SnapLink
+            </Link>
             <li className="flex items-center gap-4">
-              <div className="gap-2 py-3 px-4 rounded-3xl bg-black/60 backdrop-blur-sm hover:bg-white hover:text-black hover:cursor-pointer">
-                <Link href={user ? "/dashboard" : "/login"}>Get Started</Link>
-              </div>
+              <Link
+                href={user ? "/dashboard" : "/login"}
+                className="gap-2 py-3 px-4 rounded-3xl font-medium bg-black/60 backdrop-blur-sm hover:bg-white hover:text-black hover:cursor-pointer"
+              >
+                Get Started
+              </Link>
             </li>
           </ul>
         </nav>

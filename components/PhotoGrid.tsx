@@ -50,7 +50,7 @@ export default function PhotoGrid({
         )}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-1 p-2  ">
         {images.map(({ id, src }) => (
           <div
             className="relative group cursor-pointer"
