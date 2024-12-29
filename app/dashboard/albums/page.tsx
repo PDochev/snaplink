@@ -36,7 +36,14 @@ export default async function AlbumsPage(props: {
 
   return (
     <>
-      <NavBar />
+      <NavBar>
+        <Link
+          href="/dashboard"
+          className="gap-2 py-3 text-md px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black cursor-pointer"
+        >
+          Dashboard
+        </Link>
+      </NavBar>
       <main className="mx-auto max-w-[1960px] p-2">
         <h1 className="scroll-m-20 text-3xl sm:text-3xl md:text-4xl font-extrabold tracking-tight lg:text-5xl text-center mt-8 mb-12">
           My Shared Albums

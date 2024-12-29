@@ -2,7 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import UserAvatar from "./auth/UserAvatar";
 
-export default async function NavBar() {
+export default async function NavBar({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <nav className="sticky top-0 z-10">
       <ul className="w-full flex flex-row h-16 justify-between items-center p-4">
@@ -20,12 +24,7 @@ export default async function NavBar() {
           SnapLink
         </Link>
         <li className="flex items-center gap-4">
-          <Link
-            href="/dashboard/albums"
-            className="gap-2 py-3 text-md font-medium px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black cursor-pointer"
-          >
-            Albums
-          </Link>
+          {children}
           <UserAvatar />
         </li>
       </ul>

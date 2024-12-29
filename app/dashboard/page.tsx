@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { createUser } from "../lib/actions";
 import { User } from "../lib/definitions";
 import PhotoGrid from "@/components/PhotoGrid";
+import Link from "next/link";
 
 // export const dynamic = "force-dynamic";
 
@@ -42,7 +43,14 @@ export default async function Home() {
 
   return (
     <>
-      <NavBar />
+      <NavBar>
+        <Link
+          href="/dashboard/albums"
+          className="gap-2 py-3 text-md px-4 rounded-3xl bg-background/60 hover:bg-white hover:text-black cursor-pointer"
+        >
+          Albums
+        </Link>
+      </NavBar>
       <main className="mx-auto max-w-[1960px] mb-1">
         <div className="flex justify-center items-center">
           <h1 className="scroll-m-20 text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight lg:text-5xl mt-8 mb-8">
