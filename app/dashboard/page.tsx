@@ -2,7 +2,7 @@ import NavBar from "@/components/NavBar";
 import FileUpload from "@/components/FileUpload";
 import { getImagesByUserId } from "../lib/data";
 import { ImageS3 } from "../lib/definitions";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
@@ -10,15 +10,11 @@ import { createUser } from "../lib/actions";
 import { User } from "../lib/definitions";
 import PhotoGrid from "@/components/PhotoGrid";
 import Link from "next/link";
+import { generateMetadataCustom } from "../utils/metadata";
 
 // export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "SnapLink",
-
-  // url: "https://snaplink.vercel.app",
-  // type: "website",
-};
+export const metadata: Metadata = generateMetadataCustom("Dashboard");
 
 export default async function Home() {
   const session = await auth();

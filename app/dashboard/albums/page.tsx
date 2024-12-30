@@ -9,6 +9,10 @@ import CopyLinkButton from "./CopyLinkButton";
 import DeleteAlbumButton from "./DeleteAlbumButton";
 import SearchAlbum from "@/components/SearchAlbum";
 import { getFilteredAlbums } from "@/app/lib/data";
+import { generateMetadataCustom } from "@/app/utils/metadata";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = generateMetadataCustom("Albums");
 
 export default async function AlbumsPage(props: {
   searchParams?: Promise<{

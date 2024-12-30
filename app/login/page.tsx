@@ -1,6 +1,10 @@
 import { signIn } from "@/auth";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { generateMetadataCustom } from "../utils/metadata";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = generateMetadataCustom("Login");
 
 export default async function Home() {
   return (

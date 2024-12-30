@@ -1,9 +1,3 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "SnapLink",
-  description: "SnapLink is a photo sharing platform",
-};
 
 export default function DashboardLayout({
   children,

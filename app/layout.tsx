@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { generateMetadataCustom } from "./utils/metadata";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -14,10 +15,7 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = {
-  title: "SnapLink",
-  description: "SnapLink is a photo sharing platform",
-};
+export const metadata: Metadata = generateMetadataCustom();
 
 export default function RootLayout({
   children,
