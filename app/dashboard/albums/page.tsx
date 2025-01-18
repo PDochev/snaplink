@@ -1,6 +1,5 @@
 import { getUserAlbums } from "@/app/lib/data";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
@@ -20,7 +19,6 @@ export default async function AlbumsPage(props: {
   }>;
 }) {
   const session = await auth();
-  if (!session) redirect("/login");
 
   const email = session?.user?.email ?? "";
   const userId = await getUserIdByEmail(email);

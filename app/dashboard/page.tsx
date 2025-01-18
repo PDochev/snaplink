@@ -5,7 +5,6 @@ import { ImageS3 } from "../lib/definitions";
 import type { Metadata } from "next";
 import ScrollTopButton from "@/components/ScrollTopButton";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import { createUser } from "../lib/actions";
 import { User } from "../lib/definitions";
 import PhotoGrid from "@/components/PhotoGrid";
@@ -18,7 +17,6 @@ export const metadata: Metadata = generateMetadataCustom("Dashboard");
 
 export default async function Home() {
   const session = await auth();
-  if (!session) redirect("/login");
 
   let userId: number | null = null;
 

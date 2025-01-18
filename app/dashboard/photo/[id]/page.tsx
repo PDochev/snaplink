@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import BackButton from "@/components/BackButton";
 import DownloadButton from "@/components/DownloadButton";
 import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 import { getUserIdByEmail } from "@/app/lib/data";
 import { User } from "@/app/lib/definitions";
 
@@ -24,7 +23,6 @@ export default async function PhotoPage({
   params: Promise<{ id: string }>;
 }) {
   const session = await auth();
-  if (!session) redirect("/login");
 
   const email: User["email"] = session?.user?.email ?? "";
   const userId = await getUserIdByEmail(email);
