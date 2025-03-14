@@ -192,7 +192,7 @@ export default async function LandingPage() {
 
         {/* Footer */}
         <footer className="bg-background text-white py-12 text-center mt-20">
-          <p>&copy; 2024 SnapLink. All rights reserved.</p>
+          <p>&copy; 2025 SnapLink. All rights reserved.</p>
           <p>Plamen Dochev</p>
         </footer>
       </div>
