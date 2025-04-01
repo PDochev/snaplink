@@ -14,6 +14,9 @@ export default async function downloadPhoto(url: string) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
+    // A Blob (Binary Large Object) represents raw binary data with a specified MIME type
+    // In this case, the Blob contains the image data in its original format (PNG, JPEG, etc.)
+
     const blob = await response.blob();
     const blobUrl = window.URL.createObjectURL(blob);
 
