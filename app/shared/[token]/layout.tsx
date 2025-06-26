@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { getSharedAlbum } from "@/app/lib/data";
-import { SharedAlbum } from "@/app/lib/definitions";
+// import { getSharedAlbum } from "@/app/lib/data";
+// import { SharedAlbum } from "@/app/lib/definitions";
 import { generateMetadataCustom } from "@/app/utils/metadata";
 
 // export const generateMetadata = async ({
