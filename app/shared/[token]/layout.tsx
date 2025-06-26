@@ -2,15 +2,12 @@ import type { Metadata } from "next";
 import { getSharedAlbum } from "@/app/lib/data";
 import { SharedAlbum } from "@/app/lib/definitions";
 
-interface LayoutProps {
-  params: Promise<{ token: string }>;
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}
-
 export const generateMetadata = async ({
   params,
-}: Pick<LayoutProps, "params">): Promise<Metadata> => {
+}: {
+  params: Promise<{ token: string }>;
+  modal?: React.ReactNode; // Add this optional property
+}): Promise<Metadata> => {
   const token = (await params).token;
   const album: SharedAlbum | null = await getSharedAlbum(token);
   if (!album) {
@@ -28,7 +25,10 @@ export const generateMetadata = async ({
 export default function SharedAlbumsLayout({
   children,
   modal,
-}: Readonly<LayoutProps>) {
+}: Readonly<{
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}>) {
   return (
     <>
       {children}
